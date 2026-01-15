@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        Author: Elm Jolley
+        Date:  01.15.2026
+        Filename: FrontEnd.html
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Page</title>
+    <link rel="stylesheet" href="css/base.css">
+
+</head>
+
+<body>
+    <style>
+        html {
+            font-family: Arial, sans-serif;
+            background-color: rgb(191, 223, 185);
+        }
+    </style>
+
+    <header>
+        <h1>Configuration Page For Algo speakers</h1>
+    </header>
+    <!--time settings-->
+    <h2>Time Settings</h2>
+    <label for="time" class="timezone">Time Zone</label>
+    <select>
+        <option value="unselected">Select Time Zone</option>
+        <option value="EST-Washington DC">EST-Washington DC</option>
+        <option value="CST-Chicago">CST-Chicago</option>
+        <option value="MST-Denver">MST-Denver</option>
+        <option value="PST-Los Angeles">PST-Los Angeles</option>
+        <option value="AKST-Anchorage">AKST-Anchorage</option>
+        <option value="HST-Honolulu">HST-Honolulu</option>
+    </select>
+    <div class="input-group">
+        <label for="ntp-server-primary">NTP Primary Server Address:</label>
+        <input type="text" id="ntp-server-primary" placeholder="255.255.255.255" required>
+    </div>
+    <div class="input-group">
+        <label for="ntp-server-secondary">NTP Secondary Server Address:</label>
+        <input type="text" id="ntp-server-secondary" placeholder="255.255.255.255" required>
+    </div>
+    <div class="input-group">
+        <label for="ntp-refresh-rate">NTP Refresh Rate (in minutes):</label>
+        <input type="text" id="ntp-refresh-rate" placeholder="60" required>
+    </div>
+    <label for="NTP-override" class="overrride">NTP OVerrides Server Registration Time</label>
+    <select id="NTP-override" name="NTP-override">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+    </select>
+    <!--basic audio settings-->
+    <h2>Audio Settings</h2>
+    <label for="audio-level">Ring/Alert Volume:</label>
+    <select id="audio-level" name="audio-level">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10 (Max)</option>
+        <option value="-5">-5</option>
+        <option value="-4">-4</option>
+        <option value="-3">-3</option>
+        <option value="-2">-2</option>
+        <option value="-1">-1</option>
+    </select>
+    <label for="audio-level">Page Speaker Volume:</label>
+    <select id="audio-level" name="Page-Speaker-volume">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10 (Max)</option>
+        <option value="-5">-5</option>
+        <option value="-4">-4</option>
+        <option value="-3">-3</option>
+        <option value="-2">-2</option>
+        <option value="-1">-1</option>
+    </select>
+
+    <!--SIP settings-->
+    <h2>SIP Basic</h2>
+    <div class="input-group">
+        <label for="SIP-Domaine">SIP Domaine(proxy server):</label>
+        <input type="text" id="SIP-Domaine" placeholder="192.168.1.10:5060" required>
+    </div>
+    <p>Ring/Alert Mode:</p>
+
+    <input type="radio" id="none" name="mode" value="none" checked>
+    <label for="none">None</label><br>
+
+    <input type="radio" id="monitor" name="mode" value="monitor">
+
+    <label for="monitor">Monitor "RIng" event on registered SIP extention</label><br>
+    <div class="input-group">
+        <label for="Page-Extention">Page Extension:</label>
+        <input type="text" id="Page-Extention" required>
+    </div>
+
+    <div class="input-group">
+        <label for="AUTH-ID">Authentication ID:</label>
+        <input type="text" id="AUTH-ID" required>
+    </div>
+    <div class="input-group">
+        <label for="AUTH-PASSWD">Authentication Password:</label>
+        <input type="text" id="AUTH-PASSWD" required>
+    </div>
+    <div class="input-group">
+        <label for="Display-name">Display Name(optional but recommened):</label>
+        <input type="text" id="Display-name" placeholder="room 243, ceiling">
+    </div>
+    <h2>General SIP Advanced</h2>
+    <label for="audio-level">Page Speaker Volume:</label>
+    <select id="audio-level" name="Page-Speaker-volume">
+        <option>Auto</option>
+        <option>UDP</option>
+        <option>TCP</option>
+        <option>TLS</option>
+    </select>
+    <p>SIPS Scheme:</p>
+
+    <input type="radio" value="enabled" checked>
+    <label for="none">Enabled</label><br>
+
+    <input type="radio" value="Disabled">
+    <label for="none">Disabled</label><br>
+
+
+
+    <p>Validate Server Certification:</p>
+
+    <input type="radio" value="enabled" checked>
+    <label for="none">Enabled</label><br>
+
+    <input type="radio" value="Disabled">
+    <label for="none">Disabled</label><br>
+
+    <p>SIP Outbound Support (RFC 5626):</p>
+
+    <input type="radio" value="enabled" checked>
+    <label for="none">Enabled</label><br>
+
+    <input type="radio" value="Disabled">
+    <label for="none">Disabled</label><br>
+    <br>
+    <div class="input-group">
+        <label>Outbound Proxy:</label>
+        <input type="text" id="" placeholder="optional">
+    </div>
+    <br>
+    <div class="input-group">
+        <label> Register Period (in seconds):</label>
+        <input type="text" id="" placeholder="3600 (default setting)">
+    </div>
+
+    <p>Rate Limit SIP Registration:</p>
+
+    <input type="radio" value="no limit" checked>
+    <label for="no limit">no limit</label><br>
+
+    <input type="radio" value="10">
+    <label for="10">10/sec</label><br>
+    <input type="radio" value="5">
+    <label for="5">5/sec</label><br>
+    <input type="radio" value="1">
+    <label for="1">1 per</label><br>
+
+    <p>wait for Successful Unregister:</p>
+
+    <input type="radio" value="enabled" checked>
+    <label for="none">Enabled</label><br>
+
+    <input type="radio" value="Disabled">
+    <label for="none">Disabled</label><br>
+
+    <!--multicast settings table-->
+    <h2>Multicast Zones/Permenate Streams</h2>
+    <h4>Basic Multicast</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Zone</th>
+                <th>IP and Port</th>
+                <th>Page Tone</th>
+                <th>Volume</th>
+                <th>Music Mode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Priority Call</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>Zone 1</option>
+                        <option>Zone 2</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>All Call</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>Zone 1</option>
+                        <option>Zone 2</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 1</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 2</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 3</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 4</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 5</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zone 6</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Music</td>
+                <td><input type="text" placeholder="Server Address"></td>
+
+                <td>
+                    <select>
+                        <option>None</option>
+                    </select>
+                </td>
+
+                <td>
+                    <select>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>-1</option>
+                        <option>-2</option>
+                        <option>-3</option>
+                        <option>-4</option>
+                        <option>-5</option>
+
+                </td>
+
+                <td>
+                    <select>
+                        <option>DISABLED</option>
+                        <option>ENABLED</option>
+                    </select>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <h4>Advanced Multicast</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Zone</th>
+                <th>IP and Port</th>
+                <th>Page Tone</th>
+                <th>Volume</th>
+                <th>Music Mode</th>
+            </tr>
+        </thead>
+        <td>Zone 10</td>
+        <td><input type="text" placeholder="Server Address"></td>
+        <td> <select>
+                <option>None</option>
+            </select> </td>
+        <td> <select>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>-1</option>
+                <option>-2</option>
+                <option>-3</option>
+                <option>-4</option>
+                <option>-5</option>
+            </select> </td>
+        <td> <select>
+                <option>DISABLED</option>
+                <option>ENABLED</option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 11</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 12</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 13</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 14</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 15</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 16</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 17</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 18</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 19</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 20</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 21</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 22</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 23</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 24</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 25</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 26</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 27</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 28</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 29</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 30</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 31</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 32</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 33</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 34</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 35</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 36</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 37</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 38</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 39</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 40</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 41</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 42</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 43</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 44</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 45</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>10</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 46</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 47</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 48</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 49</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+        <tr>
+            <td>Zone 50</td>
+            <td><input type="text" placeholder="Server Address"></td>
+            <td> <select>
+                    <option>None</option>
+                </select> </td>
+            <td> <select>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>-1</option>
+                    <option>-2</option>
+                    <option>-3</option>
+                    <option>-4</option>
+                    <option>-5</option>
+                </select> </td>
+            <td> <select>
+                    <option>DISABLED</option>
+                    <option>ENABLED</option>
+                </select> </td>
+        </tr>
+
+        <tbody>
+        </tbody>
+    </table>
+    <div class="button-group">
+        <button type="button" class="btn-cancel" onclick="window.location.reload();">Cancel</button>
+        <button type="submit" class="btn-update">Update</button>
+    </div>
+
+</body>
+
+</html>
