@@ -44,19 +44,19 @@
                     "type": "dropdown",
                     "options": [
                         {
-                            "label": "North High",
-                            "value": "north_high"
+                            "label": "TEC TEST",
+                            "value": "TEC_TEST"
                         },
                         {
-                            "label": "East Elementary",
-                            "value": "east_elementary"
+                            "label": "Boardman High School",
+                            "value": "boardman_high"
                         },
                         {
-                            "label": "West Middle School",
-                            "value": "west_middle"
+                            "label": "Boardman Intermediate School",
+                            "value": "boardman_middle"
                         }
                     ],
-                    "default": "north_high",
+                    "default": "TEC_TEST",
                     "requires_reboot": false,
                     "editable": true
                 }
