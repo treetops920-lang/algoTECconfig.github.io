@@ -1,0 +1,80 @@
+{
+    "sections": [
+        {
+            "id": "audio",
+            "label": "Audio Settings",
+            "fields": [
+                {
+                    "key": "audio.startup_sound",
+                    "label": "Play startup sound on reboot?",
+                    "type": "radio",
+                    "options": [
+                        {
+                            "label": "Yes",
+                            "value": "yes"
+                        },
+                        {
+                            "label": "No",
+                            "value": "no"
+                        }
+                    ],
+                    "default": "yes",
+                    "requires_reboot": true,
+                    "editable": true
+                },
+                {
+                    "key": "audio.volume",
+                    "label": "Master volume (dB)",
+                    "type": "number",
+                    "min": -60,
+                    "max": 0,
+                    "default": -12,
+                    "requires_reboot": false,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "id": "school",
+            "label": "School Settings",
+            "fields": [
+                {
+                    "key": "school.name",
+                    "label": "Select your school",
+                    "type": "dropdown",
+                    "options": [
+                        {
+                            "label": "North High",
+                            "value": "north_high"
+                        },
+                        {
+                            "label": "East Elementary",
+                            "value": "east_elementary"
+                        },
+                        {
+                            "label": "West Middle School",
+                            "value": "west_middle"
+                        }
+                    ],
+                    "default": "north_high",
+                    "requires_reboot": false,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "id": "admin",
+            "label": "Admin Settings",
+            "fields": [
+                {
+                    "key": "admin.locked_feature",
+                    "label": "Enable advanced admin mode",
+                    "type": "checkbox",
+                    "default": false,
+                    "requires_reboot": false,
+                    "editable": false
+                }
+            ]
+        }
+    ]
+}
