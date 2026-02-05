@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header>
+            <h1>TEC Algo Speaker Mass Configuration Tool for Schools</h1>
+        </header>
+
+        <main>
+            <section>
+                <label for="districtSelect">Select District:</label>
+                <select id="districtSelect">
+                    <option value="">-- Choose District --</option>
+                    <option value="test_district">Test District</option>
+                    <option value="district_1">Boardman</option>
+                </select>
+
+                <label for="schoolSelect">Select School:</label>
+                <select id="schoolSelect">
+                    <option value="">-- Select a District First --</option>
+                </select>
+
+                <hr>
+
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+
+                <button id="loginBtn">Login</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        /* ================= DATA MAP ================= */
+        const schoolData = {
+            "test_district": ["Test"],
+            "district_1": ["Boardman Intermediate School", "Boardman High School"]
+        };
+
+        /* ================= DOM ELEMENTS ================= */
+        const districtSelect = document.getElementById("districtSelect");
+        const schoolSelect = document.getElementById("schoolSelect");
+        const loginBtn = document.getElementById("loginBtn");
+        const userField = document.getElementById("username");
+        const passField = document.getElementById("password");
+
+        /* ================= DROPDOWN LOGIC ================= */
+        districtSelect.addEventListener("change", function () {
+            const selectedDistrict = this.value;
+
+            // Reset school dropdown
+            schoolSelect.innerHTML = '<option value="">-- Choose School --</option>';
+
+            if (schoolData[selectedDistrict]) {
+                schoolData[selectedDistrict].forEach(school => {
+                    const opt = document.createElement("option");
+                    // Converts "Boardman High School" to "boardman_high_school" for the filename
+                    opt.value = school.toLowerCase().replace(/\s+/g, '_');
+                    opt.textContent = school;
+                    schoolSelect.appendChild(opt);
+                });
+            }
+        });
+
+        /* ================= LOGIN & REDIRECT LOGIC ================= */
+        loginBtn.addEventListener("click", function () {
+            const user = userField.value;
+            const pass = passField.value;
+            const district = districtSelect.value;
+            const school = schoolSelect.value;
+
+            // 1. Check if selections are made
+            if (!district || !school) {
+                alert("Please select both a District and a School!");
+                return;
+            }
+
+            // 2. Validate Credentials
+            if (user === "admin" && pass === "algo") {
+                console.log("Credentials valid. Redirecting to school page...");
+
+                // 3. Perform Redirect based on school selection
+                window.location.href = "mass-config-tool.html";
+            } else {
+                alert("Access Denied: Incorrect username or password.");
+            }
+        });
+    </script>
+</body>
+
+</html>

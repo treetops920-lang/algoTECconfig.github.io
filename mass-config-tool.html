@@ -12,6 +12,7 @@
     <title>Configuration Page</title>
     <link rel="stylesheet" href="css/base.css">
     <script src="js/respons.json" defer></script>
+</head>
 
 <body>
     <div class="page-wrapper">
@@ -33,6 +34,7 @@
                     <button>Reboot</button>
                     <button class="secondary">Reset</button>
                 </div>
+
                 <div class="update">
                     <label>Update Speaker(s) for newest firmware</label>
                     <div>
@@ -46,34 +48,15 @@
                             No
                         </label>
                     </div>
+                    <br>
+                    <button id="logoutBtn" class="logout-style">Log Out</button>
+                    <script>     document.getElementById("logoutBtn").addEventListener("click", function () {
+                            window.location.href = "login.html";
+                        });</script>
             </nav>
 
 
             <main class="content">
-                <section id="school info" class="card">
-                    <div class="input-group">
-                        <details open>
-                            <summary>School Information (required)</summary>
-                            <p>Use this to connect to your school's netwroks and have the correct
-                                selection of speakers based on builing. otherwise the input
-                                will not transfer</p>
-                            <label for="schoolSelect">School</label>
-                            <select id="schoolSelect" data-config-key="meta.school">
-                                <option value="">— Select a school —</option>
-                                <option value="north-high">TEC TEST</option>
-                                <option value="south-middle">Boardman High School</option>
-                                <option value="west-elementary">Boardman Intermedite School</option>
-                            </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="User">Username</label>
-                        <input type="text" id="User" placeholder="Enter username" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="Password">Password</label>
-                        <input type="password" id="Password" placeholder="Enter password" required>
-                    </div>
-                </section>
                 <!-- AUDIO -->
                 <section id="audio" class="card">
                     <details open>
