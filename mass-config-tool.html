@@ -50,16 +50,30 @@
 
 
             <main class="content">
-
-                <div class="input-group">
-                    <label for="schoolSelect">School</label>
-                    <select id="schoolSelect" data-config-key="meta.school">
-                        <option value="">— Select a school —</option>
-                        <option value="north-high">TEC TEST</option>
-                        <option value="south-middle">Boardman High School</option>
-                        <option value="west-elementary">Boardman Intermedite School</option>
-                    </select>
-                </div>
+                <section id="school info" class="card">
+                    <div class="input-group">
+                        <details open>
+                            <summary>School Information (required)</summary>
+                            <p>Use this to connect to your school's netwroks and have the correct
+                                selection of speakers based on builing. otherwise the input
+                                will not transfer</p>
+                            <label for="schoolSelect">School</label>
+                            <select id="schoolSelect" data-config-key="meta.school">
+                                <option value="">— Select a school —</option>
+                                <option value="north-high">TEC TEST</option>
+                                <option value="south-middle">Boardman High School</option>
+                                <option value="west-elementary">Boardman Intermedite School</option>
+                            </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="User">Username</label>
+                        <input type="text" id="User" placeholder="Enter username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Password">Password</label>
+                        <input type="password" id="Password" placeholder="Enter password" required>
+                    </div>
+                </section>
                 <!-- AUDIO -->
                 <section id="audio" class="card">
                     <details open>
