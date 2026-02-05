@@ -10,44 +10,55 @@ const DEVICE_LIST_FILE = path.resolve(__dirname, 'ip_speakers.txt');
 const CONFIG_FILE_NAME = 'config.txt';
 const PROV_URL = 'http://10.4.170.10:8080/';
 
-const DRY_RUN = false; // Set to true to test without making changes
+const DRY_RUN = false;
 const REBOOT_WAIT_TIME = 90;
+
 const COLORS = {
-    INFO: "\x1b[32m", WARN: "\x1b[33m", ERROR: "\x1b[31m", RESET: "\x1b[0m"
+    INFO: "\x1b[32m",
+    WARN: "\x1b[33m",
+    ERROR: "\x1b[31m",
+    RESET: "\x1b[0m"
 };
+
+const secureAgent = new https.Agent({ rejectUnauthorized: false });
 
 let successCount = 0;
 let failureCount = 0;
-const secureAgent = new https.Agent({ rejectUnauthorized: false });
 
-/**
- * Logs rejection details to a local file
- */
+// --- MODEL → FIRMWARE MAP ---
+const FIRMWARE_MAP = {
+    "Algo 8301 Paging Adapter": {
+        version: "3.3.0",
+        file: "8301_v3.3.0.bin"
+    },
+    "Algo 8186 SIP Horn Speaker": {
+        version: "4.5.1",
+        file: "8186_v4.5.1.bin"
+    }
+};
+
+// --- LOGGING ---
 function logRejection(host, status, message) {
     const ts = new Date().toISOString();
-    const logEntry = `[${ts}] HOST: ${host} | STATUS: ${status} | MSG: ${message}\n`;
-    try {
-        fs.appendFileSync(path.resolve(__dirname, 'rejections.log'), logEntry);
-    } catch (e) {
-        console.error("Failed to write to log file:", e.message);
-    }
+    fs.appendFileSync(
+        path.resolve(__dirname, 'rejections.log'),
+        `[${ts}] HOST: ${host} | STATUS: ${status} | MSG: ${message}\n`
+    );
     return ts;
 }
 
-/**
- * Algo HMAC API Request
- */
+// --- HMAC API ---
 async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
     const now = new Date();
-    const adjustedDate = new Date(now.getTime() + (timeOffset * 1000));
+    const adjustedDate = new Date(now.getTime() + timeOffset * 1000);
     const dateHeader = adjustedDate.toUTCString();
     const timestamp = Math.floor(adjustedDate.getTime() / 1000);
     const nonce = Math.floor(Math.random() * 1000000).toString();
     const url = `https://${host}${endpoint}`;
 
-    let hmacInput = "";
-    let contentMd5 = "";
     let bodyString = null;
+    let contentMd5 = "";
+    let hmacInput = "";
 
     if (data) {
         bodyString = JSON.stringify(data);
@@ -57,97 +68,110 @@ async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
         hmacInput = `${method}:${endpoint}:${timestamp}:${nonce}`;
     }
 
-    const signature = crypto.createHmac("sha256", API_PASSWORD.trim()).update(hmacInput).digest("hex");
-
-    const authHeader = `hmac admin:${nonce}:${signature}`.replace(/[\n\r]/g, '').trim();
-    const cleanDate = dateHeader.replace(/[\n\r]/g, '').trim();
-
-    const headers = {
-        "Authorization": authHeader,
-        "Date": cleanDate,
-    };
-
-    if (data) {
-        headers["Content-Type"] = "application/json";
-        headers["Content-Md5"] = contentMd5;
-    }
+    const signature = crypto
+        .createHmac("sha256", API_PASSWORD.trim())
+        .update(hmacInput)
+        .digest("hex");
 
     return axios({
-        method: method,
-        url: url,
+        method,
+        url,
         data: bodyString,
-        headers: headers,
+        headers: {
+            "Authorization": `hmac admin:${nonce}:${signature}`,
+            "Date": dateHeader,
+            ...(data && {
+                "Content-Type": "application/json",
+                "Content-Md5": contentMd5
+            })
+        },
         httpsAgent: secureAgent,
         timeout: 8000
     });
 }
 
-/**
- * Smart-Sync Retry Logic
- */
 async function apiRequestWithRetry(host, endpoint, method, data = null) {
     try {
-        // Attempt 1: Normal system time
         return await apiRequest(host, endpoint, method, data, 0);
     } catch (err) {
-        const status = err.response ? err.response.status : 'NETWORK_ERROR';
-        const timestamp = logRejection(host, status, err.message);
+        const status = err.response ? err.response.status : "NETWORK";
+        const ts = logRejection(host, status, err.message);
 
-        if (err.response && err.response.status === 403) {
-            const speakerDateStr = err.response.headers.date;
-            if (speakerDateStr) {
-                const speakerTime = new Date(speakerDateStr).getTime();
-                const myTime = new Date().getTime();
-                const exactOffset = Math.round((speakerTime - myTime) / 1000);
+        if (err.response?.status === 403 && err.response.headers.date) {
+            const offset =
+                Math.round(
+                    (new Date(err.response.headers.date).getTime() -
+                        Date.now()) / 1000
+                );
 
-                console.log(`${COLORS.WARN}[SYNC] ${timestamp} - Timezone drift: ${exactOffset}s. Retrying...${COLORS.RESET}`);
-
-                try {
-                    return await apiRequest(host, endpoint, method, data, exactOffset);
-                } catch (retryErr) {
-                    logRejection(host, retryErr.response ? retryErr.response.status : 'RETRY_FAIL', retryErr.message);
-                    throw retryErr;
-                }
-            }
+            console.log(`${COLORS.WARN}[SYNC] ${ts} Time drift ${offset}s — retrying${COLORS.RESET}`);
+            return apiRequest(host, endpoint, method, data, offset);
         }
         throw err;
     }
 }
 
-async function applyConfigFile(host, filePath) {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const payload = { "config": fileContent };
-
+// --- HELPERS ---
+async function waitForDevice(ip, timeout = 120000) {
+    const start = Date.now();
+    while (Date.now() - start < timeout) {
+        try {
+            await getFirmware(ip);
+            return;
+        } catch {
+            await new Promise(r => setTimeout(r, 3000));
+        }
+    }
+    throw new Error(`Device ${ip} did not return online`);
 }
 
 async function getFirmware(host) {
-    console.log(`${COLORS.WARN}[UPGRADE] Starting firmware update for ${host}...${COLORS.RESET}`);
-    const response = await apiRequestWithRetry(host, "/api/info/about", "GET");
+    const res = await apiRequestWithRetry(host, "/api/info/about", "GET");
     return {
-        version: response.data["Firmware Version"],
-        model: response.data["Product Name"]
+        model: res.data["Product Name"],
+        version: res.data["Firmware Version"]
     };
-
 }
 
-async function pushLocalFirmware(host, firmwareUrl) {
-    const payload = { "url": firmwareUrl };
-    return await apiRequestWithRetry(host, "/api/controls/upgrade/start", "POST", payload);
+function needsFirmwareUpdate(info) {
+    const fw = FIRMWARE_MAP[info.model];
+    if (!fw) return null;
+    return fw.version !== info.version ? fw : null;
 }
 
+async function uploadFirmware(host, firmwareFile) {
+    const firmwarePath = path.resolve(__dirname, "firmware", firmwareFile);
+    if (!fs.existsSync(firmwarePath)) {
+        throw new Error(`Missing firmware file ${firmwareFile}`);
+    }
+
+    return axios({
+        method: "POST",
+        url: `https://${host}/api/firmware`,
+        data: fs.readFileSync(firmwarePath),
+        headers: { "Content-Type": "application/octet-stream" },
+        httpsAgent: secureAgent,
+        timeout: 30000
+    });
+}
+
+async function applyConfigFile(host) {
+    const configPath = path.resolve(__dirname, CONFIG_FILE_NAME);
+    if (!fs.existsSync(configPath)) return;
+    const payload = { config: fs.readFileSync(configPath, "utf8") };
+    await apiRequestWithRetry(host, "/api/settings", "PUT", payload);
+}
+
+// --- DEVICE PIPELINE ---
 async function processDevice(currentIp, newIp) {
     console.log(`\n[${currentIp}] --- Starting Deployment ---`);
+
     try {
         const info = await getFirmware(currentIp);
-        console.log(`${COLORS.INFO}[OK] ${info.model} (FW: ${info.version})${COLORS.RESET}`);
+        console.log(`${COLORS.INFO}[OK] ${info.model} (FW ${info.version})${COLORS.RESET}`);
 
-        if (DRY_RUN) {
-            console.log(`${COLORS.WARN}[DRY RUN] Connection verified. Skipping changes.${COLORS.RESET}`);
-            successCount++;
-            return;
-        }
-
-        const config = {
+        // 1️⃣ LOCK STATIC IP FIRST
+        const netConfig = {
             "nm.ipv4.mode": "static",
             "nm.ipv4.address": newIp,
             "nm.ipv4.netmask": "255.255.255.0",
@@ -155,36 +179,57 @@ async function processDevice(currentIp, newIp) {
             "prov.server.url": PROV_URL,
             "admin.timezone": "America/New_York"
         };
-        await apiRequestWithRetry(currentIp, "/api/settings", "PUT", config);
 
-        const configPath = path.resolve(__dirname, CONFIG_FILE_NAME);
-        if (fs.existsSync(configPath)) {
-            await applyConfigFile(currentIp, configPath);
+        if (!DRY_RUN) {
+            await apiRequestWithRetry(currentIp, "/api/settings", "PUT", netConfig);
+            await apiRequestWithRetry(currentIp, "/api/controls/reboot", "POST");
+            await waitForDevice(newIp);
         }
 
-        await apiRequestWithRetry(currentIp, "/api/controls/reboot", "POST");
-        console.log(`${COLORS.INFO}[OK] Configuration pushed and Rebooting...${COLORS.RESET}`);
+        // 2️⃣ FIRMWARE PHASE
+        const stableInfo = await getFirmware(newIp);
+        const fwUpdate = needsFirmwareUpdate(stableInfo);
+
+        if (fwUpdate && !DRY_RUN) {
+            console.log(`${COLORS.WARN}[FW] Updating ${stableInfo.model} → ${fwUpdate.version}${COLORS.RESET}`);
+            await uploadFirmware(newIp, fwUpdate.file);
+            await apiRequestWithRetry(newIp, "/api/controls/reboot", "POST");
+            await waitForDevice(newIp);
+        }
+
+        // 3️⃣ FINAL CONFIG
+        if (!DRY_RUN) {
+            await applyConfigFile(newIp);
+            await apiRequestWithRetry(newIp, "/api/controls/reboot", "POST");
+        }
+
         successCount++;
-    } catch (error) {
-        console.log(`${COLORS.ERROR}[FAIL] ${currentIp}: ${error.message}${COLORS.RESET}`);
+        console.log(`${COLORS.INFO}[DONE] ${newIp} provisioned successfully${COLORS.RESET}`);
+
+    } catch (err) {
+        console.log(`${COLORS.ERROR}[FAIL] ${currentIp}: ${err.message}${COLORS.RESET}`);
         failureCount++;
     }
 }
 
+// --- MAIN ---
 async function main() {
-    if (!fs.existsSync(DEVICE_LIST_FILE)) return console.log("Missing ip_speakers.txt");
-    const lines = fs.readFileSync(DEVICE_LIST_FILE, "utf8").split("\n").filter(l => l.trim() && !l.startsWith("#"));
+    if (!fs.existsSync(DEVICE_LIST_FILE)) {
+        console.log("Missing ip_speakers.txt");
+        return;
+    }
+
+    const lines = fs
+        .readFileSync(DEVICE_LIST_FILE, "utf8")
+        .split("\n")
+        .filter(l => l.trim() && !l.startsWith("#"));
 
     for (const line of lines) {
-        const parts = line.split(',').map(p => p.trim());
-        const currentIp = parts[0];
-        const newIp = parts[1] || currentIp;
+        const [currentIp, newIp] = line.split(',').map(v => v.trim());
         await processDevice(currentIp, newIp);
     }
 
-    console.log(`\n=========================================`);
-    console.log(`${COLORS.INFO}Summary: ${successCount} Done | ${COLORS.ERROR}${failureCount} Failed${COLORS.RESET}`);
-    console.log(`=========================================\n`);
+    console.log(`\nCompleted: ${successCount} success, ${failureCount} failed`);
 }
 
 main();

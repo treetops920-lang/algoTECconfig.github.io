@@ -124,3 +124,9 @@ footer {
     font-size: rem;
     color: #666;
 }
+
+.update {
+    padding: 4px 10px;
+    color: rgb(39, 37, 37);
+    cursor: pointer;
+}
