@@ -32,32 +32,39 @@
                 <div class="actions">
                     <button id="generateConfig">Save</button>
 
-                    <button>Reboot</button>
-                    <button class="secondary">Reset</button>
+                    <button id="resetPage" class="secondary">Reset</button>
                 </div>
-
-                <div class="update">
-                    <label>Update Speaker(s) for newest firmware</label>
-                    <div>
-                        <label>
-                            <input type="radio" name="startupTone" value="1" checked>
-                            Yes
-                        </label>
-
-                        <label style="margin-left: 16px;">
-                            <input type="radio" name="startupTone" value="0">
-                            No
-                        </label>
-                    </div>
-                    <br>
-                    <button id="logoutBtn" class="logout-style">Log Out</button>
-                    <script>     document.getElementById("logoutBtn").addEventListener("click", function () {
-                            window.location.href = "login.html";
-                        });</script>
+                <br>
+                <button id="logoutBtn" class="logout-style">Log Out</button>
+                <script>     document.getElementById("logoutBtn").addEventListener("click", function () {
+                        window.location.href = "login.html";
+                    });</script>
             </nav>
 
 
             <main class="content">
+
+                <!--firmware updates-->
+
+                <section id="firmware" class="card">
+                    <details>
+                        <summary>
+                            Firmware Update
+                        </summary>
+                        <label>Update Speaker(s) for newest firmware</label>
+                        <div>
+                            <label>
+                                <input type="radio" name="startupTone" value="1" checked>
+                                Yes
+                            </label>
+
+                            <label style="margin-left: 16px;">
+                                <input type="radio" name="startupTone" value="0">
+                                No
+                            </label>
+                        </div>
+                    </details>
+                </section>
                 <!-- AUDIO -->
                 <section id="audio" class="card">
                     <details open>
@@ -65,7 +72,8 @@
                             Audio Settings
                         </summary><br>
                         <div class="input-group">
-                            <label>Startup sound after, will sound after EVERY reboot until box is checked No.</label>
+                            <label>Startup sound after, will sound after EVERY reboot until box is checked
+                                No.</label>
                             <div>
                                 <label>
                                     <input type="radio" name="startupTone" value="1" checked>
