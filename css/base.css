@@ -155,3 +155,73 @@ footer {
     margin-top: 12px;
     margin-bottom: 12px;
 }
+
+/* Container for the locked fields */
+.locked-context {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #f8fafc;
+    /* Light gray to show it's read-only */
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    width: fit-content;
+    /* Shrinks to fit, but we set min-width below */
+    min-width: 320px;
+    /* Ensures long school names fit comfortably */
+}
+
+/* Container: Now just a clean layout wrapper */
+.locked-context {
+    display: flex;
+    gap: 40px;
+    /* Space between District and School sections */
+    padding: 10px 0;
+    /* Vertical padding only */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    /* Light separator line */
+}
+
+/* Grouping labels and inputs */
+.input-group {
+    display: flex;
+    align-items: center;
+    /* Aligns label and text on the same line */
+    gap: 12px;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    /* Faded slate color */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+/* The Input: Styled to look like plain text, not a box */
+.input-group input[readonly] {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    /* Matches the rest of your site font */
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    width: 350px;
+    cursor: default;
+    outline: none;
+
+    /* Ensures long names don't wrap */
+    min-width: 200px;
+}
+
+/* Optional: Subtle focus/hover effect if you want users to know they can't click it */
+.input-group input[readonly]:focus {
+    outline: none;
+}
