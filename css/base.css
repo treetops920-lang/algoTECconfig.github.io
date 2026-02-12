@@ -103,6 +103,7 @@ button {
     background: var(--accent);
     color: white;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 button.secondary {
@@ -134,4 +135,23 @@ footer {
 #logoutBtn {
     background: var(--primary);
     color: var(--secondary);
+}
+
+.tiny-note {
+    font-size: 12px;
+    color: #ffffff;
+    margin-top: 8px;
+}
+
+.disclaimer {
+    font-size: 13px;
+    color: #b30808;
+    margin-top: 8px;
+}
+
+.page-btn {
+    background: var(--primary);
+    color: white;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
