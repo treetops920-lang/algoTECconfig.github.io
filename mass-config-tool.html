@@ -1874,7 +1874,32 @@
             at info@TEC911.net for any questions</span>
     </footer>
     </div>
+    <script>const district = sessionStorage.getItem("district");
+        const school = sessionStorage.getItem("school");
 
+        // Redirect if session data is missing
+        if ((!district || !school) && !loginBtn) {
+            alert("No district/school selected. Returning to login page.");
+            window.location.href = "login.html";
+        }
+
+        // Populate read-only fields on individual config page
+        const districtField = document.getElementById("currentDistrict");
+        const schoolField = document.getElementById("currentSchool");
+
+        if (districtField) districtField.value = district || "";
+        if (schoolField) schoolField.value = school || "";
+
+        if (districtField) districtField.value = district || "";
+        if (schoolField) schoolField.value = school || "";
+
+        // Optional: handle button to go from mass config -> individual config
+        const indiBtn = document.getElementById("indiConfigBtn");
+        if (indiBtn) {
+            indiBtn.addEventListener("click", () => {
+                window.location.href = "indi-config.html";
+            });
+        }</script>
     <script src="js/config-update.js"></script>
 </body>
 

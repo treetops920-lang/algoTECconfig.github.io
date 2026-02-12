@@ -1,46 +1,132 @@
-  /* Minimal styling to make it presentable */
-  body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-  }
+:root {
+    --primary: #1f4e79;
+    --secondary: #eef4fa;
+    --border: #d0d7de;
+    --accent: #4caf50;
+}
 
-  .page-wrapper {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
+/* ===== Body & Wrapper ===== */
+html, body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--secondary);
+    height: 100%;
+    margin: 0;
+}
 
-  h1 {
-      font-size: 18px;
-      text-align: center;
-      margin-bottom: 20px;
-  }
+.page-wrapper {
+    display: flex;
+    flex-direction: column; /* stack header + form vertically */
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+    min-height: 100vh;       /* fill viewport height */
+    gap: 24px;               /* space between header and form */
+    padding: 24px;
+}
 
-  section {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-  }
+/* ===== Header ===== */
+header {
+    width: 100%;
+    max-width: 400px;        /* match form card width */
+    padding: 20px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;               /* remove extra margin */
+}
 
-  input,
-  select,
-  button {
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-  }
+header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
 
-  button {
-      cursor: pointer;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-  }
+header .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
 
-  button:hover {
-      background-color: #45a049;
-  }
+/* ===== Form Section ===== */
+main section {
+    width: 100%;
+    max-width: 400px;       /* same as header */
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+/* Labels */
+main section label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Inputs & Selects */
+main section input,
+main section select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: monospace;  /* for long strings */
+    transition: all 0.2s ease;
+}
+
+main section input:focus,
+main section select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(31,78,121,0.3);
+}
+
+/* Button */
+button#loginBtn {
+    width: 100%;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button#loginBtn:hover {
+    background: #17395b;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 12px 0;
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive small screens */
+@media (max-width: 480px) {
+    .page-wrapper {
+        padding: 16px;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    main section {
+        padding: 20px;
+    }
+}
