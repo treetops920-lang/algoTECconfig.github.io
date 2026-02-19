@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const district = sessionStorage.getItem("district");
     const school = sessionStorage.getItem("school");
-
     const speakerSelect = document.getElementById("speakerSelect");
 
     if (!district || !school) {
@@ -15,38 +14,51 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Session School:", school);
 
     fetch("json/IP-arraies.json")
-        .then(response => response.json())
-        .then(data => {
+        .then(response => response.text()) // fetch as text first
+        .then(text => {
+            try {
+                const data = JSON.parse(text);
+                console.log("Loaded JSON:", data);
 
-            console.log("Loaded JSON:", data);
+                const speakers = data[district]?.[school] || [];
 
-            const speakers = data[district]?.[school];
+                speakerSelect.innerHTML = "";
 
-            speakerSelect.innerHTML = "";
+                if (speakers.length === 0) {
+                    const opt = document.createElement("option");
+                    opt.value = "";
+                    opt.textContent = "No speakers found for this school";
+                    speakerSelect.appendChild(opt);
+                    speakerSelect.disabled = true;
+                    return;
+                }
 
-            if (!speakers || speakers.length === 0) {
+                speakers.forEach(ip => {
+                    const option = document.createElement("option");
+                    option.value = ip;
+                    option.textContent = ip;
+                    speakerSelect.appendChild(option);
+                });
+
+            } catch (e) {
+                console.error("JSON parse error:", e);
+                console.log("Text received:", text);
+                speakerSelect.innerHTML = "";
                 const opt = document.createElement("option");
                 opt.value = "";
-                opt.textContent = "No speakers found for this school";
+                opt.textContent = "Error loading speakers";
                 speakerSelect.appendChild(opt);
-                return;
+                speakerSelect.disabled = true;
             }
-
-            speakers.forEach(ip => {
-                const option = document.createElement("option");
-                option.value = ip;
-                option.textContent = ip;
-                speakerSelect.appendChild(option);
-            });
         })
         .catch(error => {
-            console.error("Error loading speaker file:", error);
-
+            console.error("Fetch error:", error);
             speakerSelect.innerHTML = "";
             const opt = document.createElement("option");
             opt.value = "";
             opt.textContent = "Error loading speakers";
             speakerSelect.appendChild(opt);
+            speakerSelect.disabled = true;
         });
 
 });
