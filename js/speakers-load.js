@@ -1,40 +1,52 @@
-// Grab session data
-const district = sessionStorage.getItem("district");
-const school = sessionStorage.getItem("school");
+document.addEventListener("DOMContentLoaded", function () {
 
-const speakerSelect = document.getElementById("speakerSelect");
+    const district = sessionStorage.getItem("district");
+    const school = sessionStorage.getItem("school");
 
-if (!district || !school) {
-    alert("No district/school selected. Returning to login page.");
-    window.location.href = "login.html";
-}
+    const speakerSelect = document.getElementById("speakerSelect");
 
-// Load speaker list from JSON file
-fetch('speakers.json')
-    .then(res => res.json())
-    .then(data => {
-        // Get the speakers for this district + school
-        const speakerList = data[district]?.[school] || [];
+    if (!district || !school) {
+        alert("No district/school selected. Returning to login.");
+        window.location.href = "login.html";
+        return;
+    }
 
-        speakerList.forEach(ip => {
+    console.log("Session District:", district);
+    console.log("Session School:", school);
+
+    fetch("js/IP-arraies.json")
+        .then(response => response.json())
+        .then(data => {
+
+            console.log("Loaded JSON:", data);
+
+            const speakers = data[district]?.[school];
+
+            speakerSelect.innerHTML = "";
+
+            if (!speakers || speakers.length === 0) {
+                const opt = document.createElement("option");
+                opt.value = "";
+                opt.textContent = "No speakers found for this school";
+                speakerSelect.appendChild(opt);
+                return;
+            }
+
+            speakers.forEach(ip => {
+                const option = document.createElement("option");
+                option.value = ip;
+                option.textContent = ip;
+                speakerSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading speaker file:", error);
+
+            speakerSelect.innerHTML = "";
             const opt = document.createElement("option");
-            opt.value = ip;
-            opt.textContent = ip;
+            opt.value = "";
+            opt.textContent = "Error loading speakers";
             speakerSelect.appendChild(opt);
         });
 
-        // Optional: handle case where no speakers found
-        if (speakerList.length === 0) {
-            const opt = document.createElement("option");
-            opt.value = "";
-            opt.textContent = "No speakers found for this school";
-            speakerSelect.appendChild(opt);
-        }
-    })
-    .catch(err => {
-        console.error("Failed to load speakers:", err);
-        const opt = document.createElement("option");
-        opt.value = "";
-        opt.textContent = "Error loading speakers";
-        speakerSelect.appendChild(opt);
-    });
+});
