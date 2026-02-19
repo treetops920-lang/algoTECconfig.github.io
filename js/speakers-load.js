@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!district || !school) {
         alert("No district/school selected. Returning to login.");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
         return;
     }
 
     console.log("Session District:", district);
     console.log("Session School:", school);
 
-    fetch("js/IP-arraies.json")
+    fetch("json/IP-arraies.json")
         .then(response => response.json())
         .then(data => {
 
