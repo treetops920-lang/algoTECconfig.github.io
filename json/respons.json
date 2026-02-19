@@ -11,14 +11,14 @@
                     "options": [
                         {
                             "label": "Yes",
-                            "value": "yes"
+                            "value": "1"
                         },
                         {
                             "label": "No",
-                            "value": "no"
+                            "value": "0"
                         }
                     ],
-                    "default": "yes",
+                    "default": "1",
                     "requires_reboot": true,
                     "editable": true
                 },
@@ -44,19 +44,19 @@
                     "type": "dropdown",
                     "options": [
                         {
-                            "label": "TEC TEST",
-                            "value": "TEC_TEST"
+                            "label": "Test",
+                            "value": "test"
                         },
                         {
                             "label": "Boardman High School",
-                            "value": "boardman_high"
+                            "value": "boardman_high_school"
                         },
                         {
                             "label": "Boardman Intermediate School",
-                            "value": "boardman_middle"
+                            "value": "boardman_intermediate_school"
                         }
                     ],
-                    "default": "TEC_TEST",
+                    "default": "test",
                     "requires_reboot": false,
                     "editable": true
                 }
