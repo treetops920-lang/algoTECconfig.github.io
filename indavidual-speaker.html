@@ -79,8 +79,10 @@
                             </select>
                         </div>
 
-                        <!-- Optional Table Display -->
-                        <div id="speakerDetails"></div>
+                        <hr>
+
+                        <label>Speaker Location:</label>
+                        <input type="text" id="speakerLocation" readonly>
 
 
                     </details>
@@ -1912,38 +1914,59 @@
     </footer>
     </div>
     <script>
-        // Fetch saved district/school
-        const district = sessionStorage.getItem("district");
-        const school = sessionStorage.getItem("school");
+        /* jshint browser: true */
+        /* jshint esversion: 5 */
 
-        // Redirect if missing
-        if (!district || !school) {
-            alert("No district/school selected. Returning to login page.");
-            window.location.href = "index.html";
-        }
+        (function () {
 
-        // Populate read-only fields
-        const districtField = document.getElementById("currentDistrict");
-        const schoolField = document.getElementById("currentSchool");
+            // Run after page loads
+            document.addEventListener("DOMContentLoaded", function () {
 
-        if (districtField) districtField.value = district;
-        if (schoolField) schoolField.value = school;
+                var district = sessionStorage.getItem("district");
+                var school = sessionStorage.getItem("school");
 
-        // Mass config button
-        const massBtn = document.getElementById("mass-config");
-        if (massBtn) {
-            massBtn.addEventListener("click", () => {
-                window.location.href = "mass-config-tool.html";
+                // If missing, send back to login
+                if (!district || !school) {
+                    alert("No district/school selected. Returning to login page.");
+                    window.location.href = "index.html";
+                    return;
+                }
+
+                // Populate read-only fields
+                var districtField = document.getElementById("currentDistrict");
+                var schoolField = document.getElementById("currentSchool");
+
+                if (districtField) {
+                    districtField.value = district;
+                }
+
+                if (schoolField) {
+                    schoolField.value = school;
+                }
+
+                // Mass config button
+                var massBtn = document.getElementById("mass-config");
+                if (massBtn) {
+                    massBtn.addEventListener("click", function () {
+                        window.location.href = "mass-config-tool.html";
+                    });
+                }
+
+                // Logout button
+                var logoutBtn = document.getElementById("logoutBtn");
+                if (logoutBtn) {
+                    logoutBtn.addEventListener("click", function () {
+
+                        // Clear session
+                        sessionStorage.clear();
+
+                        window.location.href = "index.html";
+                    });
+                }
+
             });
-        }
 
-        // Logout button
-        const logoutBtn = document.getElementById("logoutBtn");
-        if (logoutBtn) {
-            logoutBtn.addEventListener("click", () => {
-                window.location.href = "index.html";
-            });
-        }
+        })();
     </script>
     <script src="js/speakers-load.js"></script>
     <script src="js/config-update.js"></script>
