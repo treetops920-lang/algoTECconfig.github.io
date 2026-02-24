@@ -1904,6 +1904,43 @@
         <span>© 2026 The Education Connection, call 1-800-800-3823 or email us
             at info@TEC911.net for any questions</span>
     </footer>
+    </div>
+    <script>
+        // Fetch saved district/school
+        const district = sessionStorage.getItem("district");
+        const school = sessionStorage.getItem("school");
+
+        // Redirect if missing
+        if (!district || !school) {
+            alert("No district/school selected. Returning to login page.");
+            window.location.href = "index.html";
+        }
+
+        // Populate read-only fields
+        const districtField = document.getElementById("currentDistrict");
+        const schoolField = document.getElementById("currentSchool");
+
+        if (districtField) districtField.value = district;
+        if (schoolField) schoolField.value = school;
+
+        // Mass config button
+        const massBtn = document.getElementById("mass-config");
+        if (massBtn) {
+            massBtn.addEventListener("click", () => {
+                window.location.href = "mass-config-tool.html";
+            });
+        }
+
+        // Logout button
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", () => {
+                window.location.href = "index.html";
+            });
+        }
+    </script>
+    <script src="js/speakers-load.js"></script>
+    <script src="js/config-update.js"></script>
 </body>
 
 </html>
