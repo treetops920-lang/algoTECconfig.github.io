@@ -20,8 +20,8 @@
         <header>
             <h1>The Education Connection</h1>
             <p class="subtitle">Algo Speaker Provisioning & Configuration</p>
-            <p class="tiny-note">This Page of configuration settings is on an indavidual speaker level.
-                Only the Speaker you have selected will be updated to this configuration</p>
+            <p class="tiny-note">This Page of Configuration settings is on an indavidual speaker level.
+                Only the Speaker you have selected will be updated to this confugration</p>
         </header>
 
         <div class="layout">
@@ -37,7 +37,13 @@
                     <button id="resetPage" class="secondary">Reset</button>
                 </div>
                 <button id="mass-config" class="page-btn">Mass Speaker Configs</button>
-
+                <script>     document.getElementById("mass-config").addEventListener("click", function () {
+                        window.location.href = "mass-config-tool.html";
+                    });</script>
+                <button id="logoutBtn" class="logout-style">Log Out</button>
+                <script>     document.getElementById("logoutBtn").addEventListener("click", function () {
+                        window.location.href = "index.html";
+                    });</script>
             </nav>
 
 
@@ -49,12 +55,8 @@
                         <summary>
                             Speaker Selection via IP Address.
                         </summary>
-
-                        <p class="disclaimer">
-                            Please only use this section if you are sure of the IP address of the
-                            speaker you want to configure.
-                        </p>
-
+                        <p class="disclaimer">Please only use this section if you are sure of the IP address of the
+                            speaker you want to configure.</p>
                         <div class="locked-context">
                             <div class="input-group">
                                 <label>District</label>
@@ -69,14 +71,17 @@
 
                         <hr>
 
-                        <h2>Select Speaker</h2>
-
+                        <!-- IP Selection -->
                         <div class="input-group">
-                            <label for="speakerSelect">Speaker (IP Address):</label>
+                            <label for="speakerSelect">Select Speaker IP</label>
                             <select id="speakerSelect">
-                                <option value="">Loading speakers...</option>
+                                <option value="">-- Select Speaker --</option>
                             </select>
                         </div>
+
+                        <!-- Optional Table Display -->
+                        <div id="speakerDetails"></div>
+
 
                     </details>
                 </section>
@@ -1900,6 +1905,7 @@
             </main>
         </div>
     </div>
+
     <footer>
         <span>© 2026 The Education Connection, call 1-800-800-3823 or email us
             at info@TEC911.net for any questions</span>
