@@ -3,11 +3,11 @@
         "test": [
             {
                 "ip": "192.168.100.163",
-                "location": ""
+                "location": "TEC Office"
             },
             {
                 "ip": "192.168.100.165",
-                "location": ""
+                "location": "TEC Office"
             }
         ]
     },
@@ -665,771 +665,767 @@
             },
             {
                 "ip": "10.4.170.32",
-                "location": ""
+                "location": "S Hall 1-7"
             },
             {
                 "ip": "10.4.170.33",
-                "location": ""
+                "location": "151B"
             },
             {
                 "ip": "10.4.170.34",
-                "location": ""
+                "location": "101"
             },
             {
                 "ip": "10.4.170.35",
-                "location": ""
+                "location": "154"
             },
             {
                 "ip": "10.4.170.36",
-                "location": ""
+                "location": "124"
             },
             {
                 "ip": "10.4.170.37",
-                "location": ""
+                "location": "102A"
             },
             {
                 "ip": "10.4.170.38",
-                "location": ""
+                "location": "156"
             },
             {
                 "ip": "10.4.170.39",
-                "location": ""
+                "location": "114"
             },
             {
                 "ip": "10.4.170.40",
-                "location": ""
+                "location": "123"
             },
             {
                 "ip": "10.4.170.41",
-                "location": ""
-            },
-            {
-                "ip": "10.4.170.43",
-                "location": ""
+                "location": "134"
             },
             {
                 "ip": "10.4.170.44",
-                "location": ""
+                "location": "S.S. Faculty"
             },
             {
                 "ip": "10.4.170.45",
-                "location": ""
+                "location": "136"
             },
             {
                 "ip": "10.4.170.48",
-                "location": ""
+                "location": "153"
             },
             {
                 "ip": "10.4.170.49",
-                "location": ""
+                "location": "246"
             },
             {
                 "ip": "10.4.170.50",
-                "location": ""
+                "location": "Faculty B"
             },
             {
                 "ip": "10.4.170.51",
-                "location": ""
+                "location": "255"
             },
             {
                 "ip": "10.4.170.53",
-                "location": ""
+                "location": "S Hall 2-6"
             },
             {
                 "ip": "10.4.170.54",
-                "location": ""
+                "location": "254"
             },
             {
                 "ip": "10.4.170.55",
-                "location": ""
+                "location": "224"
             },
             {
                 "ip": "10.4.170.56",
-                "location": ""
+                "location": "E Hall 2-4"
             },
             {
                 "ip": "10.4.170.57",
-                "location": ""
+                "location": "N Hall 2-2"
             },
             {
                 "ip": "10.4.170.58",
-                "location": ""
+                "location": "212"
             },
             {
                 "ip": "10.4.170.59",
-                "location": ""
+                "location": "204"
             },
             {
                 "ip": "10.4.170.60",
-                "location": ""
+                "location": "214"
             },
             {
                 "ip": "10.4.170.61",
-                "location": ""
+                "location": "206"
             },
             {
                 "ip": "10.4.170.62",
-                "location": ""
+                "location": "W Hall 2-8"
             },
             {
                 "ip": "10.4.170.63",
-                "location": ""
+                "location": "216"
             },
             {
                 "ip": "10.4.170.64",
-                "location": ""
+                "location": "Girls RR 2nd Floor"
             },
             {
                 "ip": "10.4.170.65",
-                "location": ""
+                "location": "235"
             },
             {
                 "ip": "10.4.170.66",
-                "location": ""
+                "location": "223"
             },
             {
                 "ip": "10.4.170.67",
-                "location": ""
+                "location": "Boys RR 2nd Floor"
             },
             {
                 "ip": "10.4.170.68",
-                "location": ""
+                "location": "221"
             },
             {
                 "ip": "10.4.170.69",
-                "location": ""
+                "location": "205"
             },
             {
                 "ip": "10.4.170.70",
-                "location": ""
+                "location": "233"
             },
             {
                 "ip": "10.4.170.71",
-                "location": ""
+                "location": "231"
             },
             {
                 "ip": "10.4.170.73",
-                "location": ""
+                "location": "234"
             },
             {
                 "ip": "10.4.170.74",
-                "location": ""
+                "location": "222"
             },
             {
                 "ip": "10.4.170.75",
-                "location": ""
+                "location": "241"
             },
             {
                 "ip": "10.4.170.76",
-                "location": ""
+                "location": "225"
             },
             {
                 "ip": "10.4.170.77",
-                "location": ""
+                "location": "215"
             },
             {
                 "ip": "10.4.170.78",
-                "location": ""
+                "location": "213"
             },
             {
                 "ip": "10.4.170.79",
-                "location": ""
+                "location": "245"
             },
             {
                 "ip": "10.4.170.80",
-                "location": ""
+                "location": "242"
             },
             {
                 "ip": "10.4.170.81",
-                "location": ""
+                "location": "217"
             },
             {
                 "ip": "10.4.170.82",
-                "location": ""
+                "location": "211"
             },
             {
                 "ip": "10.4.170.83",
-                "location": ""
+                "location": "151A"
             },
             {
                 "ip": "10.4.170.84",
-                "location": ""
+                "location": "N Hall 2-3"
             },
             {
                 "ip": "10.4.170.85",
-                "location": ""
+                "location": "256"
             },
             {
                 "ip": "10.4.170.86",
-                "location": ""
+                "location": "Faculty A"
             },
             {
                 "ip": "10.4.170.87",
-                "location": ""
+                "location": "201"
             },
             {
                 "ip": "10.4.170.88",
-                "location": ""
+                "location": "S Hall 2-7"
             },
             {
                 "ip": "10.4.170.89",
-                "location": ""
+                "location": "S Hall 2-5"
             },
             {
                 "ip": "10.4.170.90",
-                "location": ""
+                "location": "N Hall 2-1"
             },
             {
                 "ip": "10.4.170.91",
-                "location": ""
+                "location": "243"
             },
             {
                 "ip": "10.4.170.92",
-                "location": ""
+                "location": "244"
             },
             {
                 "ip": "10.4.170.93",
-                "location": ""
+                "location": "321"
             },
             {
                 "ip": "10.4.170.94",
-                "location": ""
+                "location": "312"
             },
             {
                 "ip": "10.4.170.95",
-                "location": ""
+                "location": "Science Faculty"
             },
             {
                 "ip": "10.4.170.96",
-                "location": ""
+                "location": "Girls RR 3rd Floor"
             },
             {
                 "ip": "10.4.170.97",
-                "location": ""
+                "location": "303"
             },
             {
                 "ip": "10.4.170.98",
-                "location": ""
+                "location": "331"
             },
             {
                 "ip": "10.4.170.99",
-                "location": ""
+                "location": "323"
             },
             {
                 "ip": "10.4.170.100",
-                "location": ""
+                "location": "305"
             },
             {
                 "ip": "10.4.170.101",
-                "location": ""
+                "location": "343"
             },
             {
                 "ip": "10.4.170.102",
-                "location": ""
+                "location": "313"
             },
             {
                 "ip": "10.4.170.103",
-                "location": ""
+                "location": "301"
             },
             {
                 "ip": "10.4.170.104",
-                "location": ""
+                "location": "341"
             },
             {
                 "ip": "10.4.170.105",
-                "location": ""
+                "location": "N Hall 3-2"
             },
             {
                 "ip": "10.4.170.106",
-                "location": ""
+                "location": "W Hall 3-8"
             },
             {
                 "ip": "10.4.170.107",
-                "location": ""
+                "location": "E Hall 3-4"
             },
             {
                 "ip": "10.4.170.108",
-                "location": ""
+                "location": "324"
             },
             {
                 "ip": "10.4.170.109",
-                "location": ""
+                "location": "336"
             },
             {
                 "ip": "10.4.170.112",
-                "location": ""
+                "location": "344"
             },
             {
                 "ip": "10.4.170.113",
-                "location": ""
+                "location": "S Hall 3-6"
             },
             {
                 "ip": "10.4.170.114",
-                "location": ""
+                "location": "Boys RR 3rd Floor"
             },
             {
                 "ip": "10.4.170.116",
-                "location": ""
+                "location": "S Hall 3-7"
             },
             {
                 "ip": "10.4.170.117",
-                "location": ""
+                "location": "N Hall 3-3"
             },
             {
                 "ip": "10.4.170.118",
-                "location": ""
+                "location": "S Hall 3-5"
             },
             {
                 "ip": "10.4.170.119",
-                "location": ""
+                "location": "354"
             },
             {
                 "ip": "10.4.170.120",
-                "location": ""
+                "location": "317"
             },
             {
                 "ip": "10.4.170.121",
-                "location": ""
+                "location": "N Hall 3-1"
             },
             {
                 "ip": "10.4.170.122",
-                "location": ""
+                "location": "356"
             },
             {
                 "ip": "10.4.170.123",
-                "location": ""
+                "location": "351"
             },
             {
                 "ip": "10.4.170.124",
-                "location": ""
+                "location": "Aud 2"
             },
             {
                 "ip": "10.4.170.125",
-                "location": ""
+                "location": "Band Room"
             },
             {
                 "ip": "10.4.170.126",
-                "location": ""
+                "location": "Practice Room 2"
             },
             {
                 "ip": "10.4.170.127",
-                "location": ""
+                "location": "Cafe C-3"
             },
             {
                 "ip": "10.4.170.128",
-                "location": ""
+                "location": "Aud 4"
             },
             {
                 "ip": "10.4.170.129",
-                "location": ""
+                "location": "Cafe C-5"
             },
             {
                 "ip": "10.4.170.130",
-                "location": ""
+                "location": "Aud 6"
             },
             {
                 "ip": "10.4.170.131",
-                "location": ""
+                "location": "Cafe C-1"
             },
             {
                 "ip": "10.4.170.132",
-                "location": ""
+                "location": "Main Office 4"
             },
             {
                 "ip": "10.4.170.133",
-                "location": ""
+                "location": "Cafe C-4"
             },
             {
                 "ip": "10.4.170.134",
-                "location": ""
+                "location": "Main Office 8"
             },
             {
                 "ip": "10.4.170.135",
-                "location": ""
+                "location": "Main Office 2"
             },
             {
                 "ip": "10.4.170.136",
-                "location": ""
+                "location": "Cafe C-2"
             },
             {
                 "ip": "10.4.170.137",
-                "location": ""
+                "location": "Cafe C-8"
             },
             {
                 "ip": "10.4.170.138",
-                "location": ""
+                "location": "Cafe C-6"
             },
             {
                 "ip": "10.4.170.139",
-                "location": ""
+                "location": "Chorus Room"
             },
             {
                 "ip": "10.4.170.140",
-                "location": ""
+                "location": "Aud 1"
             },
             {
                 "ip": "10.4.170.141",
-                "location": ""
+                "location": "Main Office 6"
             },
             {
                 "ip": "10.4.170.142",
-                "location": ""
+                "location": "Aud 3"
             },
             {
                 "ip": "10.4.170.143",
-                "location": ""
+                "location": "Aud 5"
             },
             {
                 "ip": "10.4.170.144",
-                "location": ""
+                "location": "practice Room 1"
             },
             {
                 "ip": "10.4.170.145",
-                "location": ""
+                "location": "Main Hall 6"
             },
             {
                 "ip": "10.4.170.146",
-                "location": ""
+                "location": "21"
             },
             {
                 "ip": "10.4.170.147",
-                "location": ""
+                "location": "Main Hall 2"
             },
             {
                 "ip": "10.4.170.148",
-                "location": ""
+                "location": "Cafe C-7"
             },
             {
                 "ip": "10.4.170.149",
-                "location": ""
+                "location": "Main office 1"
             },
             {
                 "ip": "10.4.170.150",
-                "location": ""
+                "location": "Main office 7"
             },
             {
                 "ip": "10.4.170.151",
-                "location": ""
+                "location": "Music Hall 4"
             },
             {
                 "ip": "10.4.170.152",
-                "location": ""
+                "location": "Main Office 3"
             },
             {
                 "ip": "10.4.170.153",
-                "location": ""
+                "location": "Main office 5"
             },
             {
                 "ip": "10.4.170.154",
-                "location": ""
+                "location": "Main Hall 7"
             },
             {
                 "ip": "10.4.170.155",
-                "location": ""
+                "location": "Music Hall 3"
             },
             {
                 "ip": "10.4.170.156",
-                "location": ""
+                "location": "Main Hall 1"
             },
             {
                 "ip": "10.4.170.158",
-                "location": ""
+                "location": "Girls RR Main"
             },
             {
                 "ip": "10.4.170.159",
-                "location": ""
+                "location": "Library"
             },
             {
                 "ip": "10.4.170.160",
-                "location": ""
+                "location": "Boys RR Main"
             },
             {
                 "ip": "10.4.170.161",
-                "location": ""
+                "location": "BOE 1"
             },
             {
                 "ip": "10.4.170.162",
-                "location": ""
+                "location": "BOE 6"
             },
             {
                 "ip": "10.4.170.163",
-                "location": ""
+                "location": "BOE 4"
             },
             {
                 "ip": "10.4.170.164",
-                "location": ""
+                "location": "65"
             },
             {
                 "ip": "10.4.170.165",
-                "location": ""
+                "location": "BOE 2"
             },
             {
                 "ip": "10.4.170.166",
-                "location": ""
+                "location": "Gym Hall 4"
             },
             {
                 "ip": "10.4.170.167",
-                "location": ""
+                "location": "BOE 5"
             },
             {
                 "ip": "10.4.170.168",
-                "location": ""
+                "location": "BOE 3"
             },
             {
                 "ip": "10.4.170.169",
-                "location": ""
+                "location": "Gym Hall 2"
             },
             {
                 "ip": "10.4.170.170",
-                "location": ""
+                "location": "Gym Hall 1"
             },
             {
                 "ip": "10.4.170.171",
-                "location": ""
+                "location": "BOE 7"
             },
             {
                 "ip": "10.4.170.172",
-                "location": ""
+                "location": "Gym Hall 3"
             },
             {
                 "ip": "10.4.170.173",
-                "location": ""
+                "location": "Gym Hall 5"
             },
             {
                 "ip": "10.4.170.176",
-                "location": ""
+                "location": "11"
             },
             {
                 "ip": "10.4.170.177",
-                "location": ""
+                "location": "Kitchen 6"
             },
             {
                 "ip": "10.4.170.178",
-                "location": ""
+                "location": "Art Hall 2"
             },
             {
                 "ip": "10.4.170.179",
-                "location": ""
+                "location": "34 A"
             },
             {
                 "ip": "10.4.170.180",
-                "location": ""
+                "location": "34 B"
             },
             {
                 "ip": "10.4.170.181",
-                "location": ""
+                "location": "Kitchen 5"
             },
             {
                 "ip": "10.4.170.182",
-                "location": ""
+                "location": "Art Hall 3"
             },
             {
                 "ip": "10.4.170.183",
-                "location": ""
+                "location": "14"
             },
             {
                 "ip": "10.4.170.184",
-                "location": ""
+                "location": "Art Hall 4"
             },
             {
                 "ip": "10.4.170.185",
-                "location": ""
+                "location": "33A"
             },
             {
                 "ip": "10.4.170.186",
-                "location": ""
+                "location": "Kitchen 2"
             },
             {
                 "ip": "10.4.170.187",
-                "location": ""
+                "location": "12"
             },
             {
                 "ip": "10.4.170.188",
-                "location": ""
+                "location": "Kitchen 4"
             },
             {
                 "ip": "10.4.170.189",
-                "location": ""
+                "location": "33B"
             },
             {
                 "ip": "10.4.170.190",
-                "location": ""
+                "location": "35A"
             },
             {
                 "ip": "10.4.170.191",
-                "location": ""
+                "location": "Kitchen 3"
             },
             {
                 "ip": "10.4.170.192",
-                "location": ""
+                "location": "Art Hall 1"
             },
             {
                 "ip": "10.4.170.193",
-                "location": ""
+                "location": "31"
             },
             {
                 "ip": "10.4.170.194",
-                "location": ""
+                "location": "Kitchen 1"
             },
             {
                 "ip": "10.4.170.195",
-                "location": ""
+                "location": "BPAC Hall 1"
             },
             {
                 "ip": "10.4.170.196",
-                "location": ""
+                "location": "BPAC Hall 2"
             },
             {
                 "ip": "10.4.170.198",
-                "location": ""
+                "location": "15"
             },
             {
                 "ip": "10.4.170.199",
-                "location": ""
+                "location": "112"
             },
             {
                 "ip": "10.4.170.205",
-                "location": ""
+                "location": "232"
             },
             {
                 "ip": "10.4.170.206",
-                "location": ""
+                "location": "335"
             },
             {
                 "ip": "10.4.170.207",
-                "location": ""
+                "location": "Shop Hall 5"
             },
             {
                 "ip": "10.4.170.208",
-                "location": ""
+                "location": "Shop Hall 6"
             },
             {
                 "ip": "10.4.170.209",
-                "location": ""
+                "location": "Shop Hall 8"
             },
             {
                 "ip": "10.4.170.210",
-                "location": ""
+                "location": "Music Hall 5"
             },
             {
                 "ip": "10.4.170.211",
-                "location": ""
+                "location": "Math Faculty"
             },
             {
                 "ip": "10.4.170.212",
-                "location": ""
+                "location": "13"
             },
             {
                 "ip": "10.4.170.213",
-                "location": ""
+                "location": "Gym 7"
             },
             {
                 "ip": "10.4.170.214",
-                "location": ""
+                "location": "Gym 3"
             },
             {
                 "ip": "10.4.170.215",
-                "location": ""
+                "location": "Gym 8"
             },
             {
                 "ip": "10.4.170.216",
-                "location": ""
+                "location": "Gym 2"
             },
             {
                 "ip": "10.4.170.217",
-                "location": ""
+                "location": "Gym 6"
             },
             {
                 "ip": "10.4.170.218",
-                "location": ""
+                "location": "Gym 4"
             },
             {
                 "ip": "10.4.170.219",
-                "location": ""
+                "location": "Gym 5"
             },
             {
                 "ip": "10.4.170.220",
-                "location": ""
+                "location": "Gym 1"
             },
             {
                 "ip": "10.4.170.221",
-                "location": ""
+                "location": "32"
             },
             {
                 "ip": "10.4.170.222",
-                "location": ""
+                "location": "353"
             },
             {
                 "ip": "10.4.170.223",
-                "location": ""
+                "location": "316"
             },
             {
                 "ip": "10.4.170.224",
-                "location": ""
+                "location": "315"
             },
             {
                 "ip": "10.4.170.225",
-                "location": ""
+                "location": "314"
             },
             {
                 "ip": "10.4.170.226",
-                "location": ""
+                "location": "306"
             },
             {
                 "ip": "10.4.170.231",
-                "location": ""
+                "location": "exterior horn"
             },
             {
                 "ip": "10.4.170.233",
-                "location": ""
+                "location": "141"
             },
             {
                 "ip": "10.4.170.234",
-                "location": ""
+                "location": "35 B"
             },
             {
                 "ip": "10.4.170.236",
-                "location": ""
+                "location": "121"
             },
             {
                 "ip": "10.4.170.237",
-                "location": ""
+                "location": "113"
             },
             {
                 "ip": "10.4.170.238",
-                "location": ""
+                "location": "115"
             },
             {
                 "ip": "10.4.170.239",
-                "location": ""
+                "location": "Boys RR 1st"
             },
             {
                 "ip": "10.4.170.240",
-                "location": ""
+                "location": "116"
             },
             {
                 "ip": "10.4.170.241",
-                "location": ""
+                "location": "203"
             },
             {
                 "ip": "10.4.170.242",
-                "location": ""
+                "location": "253"
             },
             {
                 "ip": "10.4.170.243",
-                "location": ""
+                "location": "346"
             },
             {
                 "ip": "10.4.170.244",
-                "location": ""
+                "location": "311"
             },
             {
                 "ip": "10.4.170.246",
-                "location": ""
+                "location": "202"
             },
             {
                 "ip": "10.4.170.247",
-                "location": ""
+                "location": "Girls Locker Room HR"
             }
         ]
     }

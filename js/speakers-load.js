@@ -1,64 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const district = sessionStorage.getItem("district");
-    const school = sessionStorage.getItem("school");
+    const districtInput = document.getElementById("currentDistrict");
+    const schoolInput = document.getElementById("currentSchool");
     const speakerSelect = document.getElementById("speakerSelect");
+    const speakerLocation = document.getElementById("speakerLocation");
 
-    if (!district || !school) {
-        alert("No district/school selected. Returning to login.");
-        window.location.href = "index.html";
-        return;
-    }
+    let speakerData = {};
 
-    console.log("Session District:", district);
-    console.log("Session School:", school);
+    document.getElementById("currentDistrict").value
+    document.getElementById("currentSchool").value
 
-    fetch("json/IP-arraies.json")
-        .then(response => response.text()) // fetch as text first
-        .then(text => {
-            try {
-                const data = JSON.parse(text);
-                console.log("Loaded JSON:", data);
-
-                const speakers = data[district]?.[school] || [];
-
-                speakerSelect.innerHTML = "";
-
-                if (speakers.length === 0) {
-                    const opt = document.createElement("option");
-                    opt.value = "";
-                    opt.textContent = "No speakers found for this school";
-                    speakerSelect.appendChild(opt);
-                    speakerSelect.disabled = true;
-                    return;
-                }
-
-                speakers.forEach(ip => {
-                    const option = document.createElement("option");
-                    option.value = ip;
-                    option.textContent = ip;
-                    speakerSelect.appendChild(option);
-                });
-
-            } catch (e) {
-                console.error("JSON parse error:", e);
-                console.log("Text received:", text);
-                speakerSelect.innerHTML = "";
-                const opt = document.createElement("option");
-                opt.value = "";
-                opt.textContent = "Error loading speakers";
-                speakerSelect.appendChild(opt);
-                speakerSelect.disabled = true;
-            }
+    // 🔹 Load JSON
+    fetch("json/IP-arraies.json") // <-- adjust path if needed
+        .then(response => response.json())
+        .then(data => {
+            speakerData = data;
+            populateSpeakers();
         })
         .catch(error => {
-            console.error("Fetch error:", error);
-            speakerSelect.innerHTML = "";
-            const opt = document.createElement("option");
-            opt.value = "";
-            opt.textContent = "Error loading speakers";
-            speakerSelect.appendChild(opt);
-            speakerSelect.disabled = true;
+            console.error("Error loading IP JSON:", error);
         });
+
+    function populateSpeakers() {
+
+        const district = districtInput.value;
+        const school = schoolInput.value;
+
+        // Clear dropdown
+        speakerSelect.innerHTML = `<option value="">-- Select Speaker --</option>`;
+        speakerLocation.value = "";
+
+        if (!speakerData[district] || !speakerData[district][school]) {
+            console.warn("No speakers found for:", district, school);
+            return;
+        }
+
+        const speakers = speakerData[district][school];
+
+        speakers.forEach(speaker => {
+            const option = document.createElement("option");
+            option.value = speaker.ip;
+            option.textContent = speaker.ip;
+            option.dataset.location = speaker.location || "Unknown";
+            speakerSelect.appendChild(option);
+        });
+    }
+
+    // 🔹 When IP is selected → fill location
+    speakerSelect.addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+
+        if (!selectedOption.value) {
+            speakerLocation.value = "";
+            return;
+        }
+
+        speakerLocation.value = selectedOption.dataset.location || "Unknown";
+    });
 
 });
