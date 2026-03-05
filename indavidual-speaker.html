@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indavidual Configuration Page</title>
     <link rel="stylesheet" href="css/base.css">
-    <script src="js/respons.json" defer></script>
 </head>
 
 <body>
@@ -72,17 +71,15 @@
                         <hr>
 
                         <!-- IP Selection -->
-                        <div class="input-group">
-                            <label for="speakerSelect">Select Speaker IP</label>
-                            <select id="speakerSelect">
-                                <option value="">-- Select Speaker --</option>
-                            </select>
-                        </div>
+                        <label for="speakerSelect">Select Speaker IP:</label>
 
-                        <hr>
+                        <select id="speakerSelect">
+                            <option value="">Select an IP</option>
+                        </select>
 
-                        <label>Speaker Location:</label>
-                        <input type="text" id="speakerLocation" readonly>
+                        <p id="locationDisplay">Location: </p>
+
+
 
 
                     </details>
@@ -1968,7 +1965,7 @@
 
         })();
     </script>
-    <script src="js/speakers-load.js"></script>
+    <script src="js/speakers-load.js" defer></script>
     <script src="js/config-update.js"></script>
 </body>
 

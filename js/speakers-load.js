@@ -1,61 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
+let speakers = [];
 
-    const districtInput = document.getElementById("currentDistrict");
-    const schoolInput = document.getElementById("currentSchool");
-    const speakerSelect = document.getElementById("speakerSelect");
-    const speakerLocation = document.getElementById("speakerLocation");
+async function loadSpeakers() {
+    try {
+        const response = await fetch("json/IP-arrays.json");
+        speakers = await response.json();
 
-    let speakerData = {};
-
-    document.getElementById("currentDistrict").value
-    document.getElementById("currentSchool").value
-
-    // 🔹 Load JSON
-    fetch("json/IP-arraies.json") // <-- adjust path if needed
-        .then(response => response.json())
-        .then(data => {
-            speakerData = data;
-            populateSpeakers();
-        })
-        .catch(error => {
-            console.error("Error loading IP JSON:", error);
-        });
-
-    function populateSpeakers() {
-
-        const district = districtInput.value;
-        const school = schoolInput.value;
-
-        // Clear dropdown
-        speakerSelect.innerHTML = `<option value="">-- Select Speaker --</option>`;
-        speakerLocation.value = "";
-
-        if (!speakerData[district] || !speakerData[district][school]) {
-            console.warn("No speakers found for:", district, school);
-            return;
-        }
-
-        const speakers = speakerData[district][school];
+        const dropdown = document.getElementById("speakerSelect");
 
         speakers.forEach(speaker => {
             const option = document.createElement("option");
+
             option.value = speaker.ip;
-            option.textContent = speaker.ip;
-            option.dataset.location = speaker.location || "Unknown";
-            speakerSelect.appendChild(option);
+
+            // What the user sees
+            option.textContent = `${speaker.ip} — ${speaker.location}`;
+
+            dropdown.appendChild(option);
         });
+
+    } catch (error) {
+        console.error("Error loading speakers:", error);
     }
+}
 
-    // 🔹 When IP is selected → fill location
-    speakerSelect.addEventListener("change", function () {
-        const selectedOption = this.options[this.selectedIndex];
+document.getElementById("speakerSelect").addEventListener("change", function () {
 
-        if (!selectedOption.value) {
-            speakerLocation.value = "";
-            return;
-        }
+    const selectedIP = this.value;
 
-        speakerLocation.value = selectedOption.dataset.location || "Unknown";
-    });
+    const speaker = speakers.find(s => s.ip === selectedIP);
 
+    const display = document.getElementById("locationDisplay");
+
+    if (speaker) {
+        display.textContent = `Location: ${speaker.location}`;
+    } else {
+        display.textContent = "Location:";
+    }
+    console.log("script running")
 });
+
+window.onload = loadSpeakers;
