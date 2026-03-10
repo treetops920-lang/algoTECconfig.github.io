@@ -383,6 +383,11 @@
             {
                 "ip": "10.4.172.91",
                 "location": "2nd Floor West Hall 3",
+                "mac": "00:22:EE:11:31:F5"
+            },
+            {
+                "ip": "10.4.172.92",
+                "location": "215",
                 "mac": "00:22:EE:07:F8:9C"
             },
             {
@@ -413,220 +418,232 @@
             {
                 "ip": "10.4.172.99",
                 "location": "220",
-                "mac": "00:22:EE:17:2B:2A"
+                "mac": "00:22:EE:27:01:58"
             },
             {
                 "ip": "10.4.172.100",
                 "location": "214",
-                "mac": "00:22:EE:27:01:58"
+                "mac": "00:22:EE:07:F8:C3"
             },
             {
                 "ip": "10.4.172.102",
                 "location": "229",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:98"
             },
             {
                 "ip": "10.4.172.103",
                 "location": "224",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:9E"
             },
             {
                 "ip": "10.4.172.104",
                 "location": "212",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:AE"
             },
             {
                 "ip": "10.4.172.105",
                 "location": "228",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:A7"
+            },
+            {
+                "ip": "10.4.172.106",
+                "location": "211",
+                "mac": "00:22:EE:07:F8:8B"
             },
             {
                 "ip": "10.4.172.107",
                 "location": "210",
-                "mac": ""
+                "mac": "00:22:EE:27:01:62"
             },
             {
                 "ip": "10.4.172.108",
                 "location": "2nd Floor North Boys RestRoom",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:11"
             },
             {
                 "ip": "10.4.172.109",
                 "location": "227",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:A5"
+            },
+            {
+                "ip": "10.4.172.110",
+                "location": "223A",
+                "mac": "00:22:EE:07:F8:9A"
             },
             {
                 "ip": "10.4.172.111",
                 "location": "223B",
-                "mac": ""
+                "mac": "00:22:EE:27:01:4E"
             },
             {
                 "ip": "10.4.172.112",
                 "location": "223C",
-                "mac": ""
+                "mac": "00:22:EE:27:01:5B"
             },
             {
                 "ip": "10.4.172.113",
                 "location": "2nd Floor North Girls RestRoom",
-                "mac": ""
+                "mac": "00:22:EE:17:26:8C"
             },
             {
                 "ip": "10.4.172.114",
                 "location": "3rd Floor Hall Cafe 1",
-                "mac": ""
+                "mac": "00:22:EE:11:2E:10"
             },
             {
                 "ip": "10.4.172.115",
                 "location": "3rd Floor Hall Cafe 2",
-                "mac": ""
+                "mac": "00:22:EE:11:2E:14"
             },
             {
                 "ip": "10.4.172.116",
                 "location": "3rd Floor Hall Cafe 3",
-                "mac": ""
+                "mac": "00:22:EE:11:30:9E"
             },
             {
                 "ip": "10.4.172.117",
                 "location": "3rd Floor C1",
-                "mac": ""
+                "mac": "00:22:EE:27:01:5D"
             },
             {
                 "ip": "10.4.172.118",
-                "location": "306"
+                "location": "306",
+                "mac": "00:22:EE:07:FF:BD"
             },
             {
                 "ip": "10.4.172.119",
                 "location": "3rd Floor C2",
-                "mac": ""
+                "mac": "00:22:EE:27:01:43"
             },
             {
                 "ip": "10.4.172.120",
                 "location": "3rd Floor C3",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:BA"
             },
             {
                 "ip": "10.4.172.121",
                 "location": "3rd Floor C4",
-                "mac": ""
+                "mac": "00:22:EE:27:01:5A"
             },
             {
                 "ip": "10.4.172.122",
                 "location": "Kitchen Office",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:B5"
             },
             {
                 "ip": "10.4.172.123",
                 "location": "3rd Floor North Hall 1a",
-                "mac": ""
+                "mac": "00:22:EE:11:32:81"
             },
             {
                 "ip": "10.4.172.124",
                 "location": "3rd Floor North Main Hall 4",
-                "mac": ""
+                "mac": "00:22:EE:11:30:A9"
             },
             {
                 "ip": "10.4.172.125",
                 "location": "3rd Floor North Main Hall 3",
-                "mac": ""
+                "mac": "00:22:EE:11:2D:F1"
             },
             {
                 "ip": "10.4.172.126",
                 "location": "3rd Floor North Hall 1b",
-                "mac": ""
+                "mac": "00:22:EE:11:2E:04"
             },
             {
                 "ip": "10.4.172.127",
                 "location": "3rd Floor West Hall 2",
-                "mac": ""
+                "mac": "00:22:EE:11:2E:07"
             },
             {
                 "ip": "10.4.172.128",
                 "location": "3rd Floor West Hall 3",
-                "mac": ""
+                "mac": "00:22:EE:11:2E:08"
             },
             {
                 "ip": "10.4.172.129",
                 "location": "3rd Floor South Girls Rest Room",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:3A"
             },
             {
                 "ip": "10.4.172.130",
                 "location": "303",
-                "mac": ""
+                "mac": "00:22:EE:07:FF:A3"
             },
             {
                 "ip": "10.4.172.131",
                 "location": "302",
-                "mac": ""
+                "mac": "00:22:EE:27:01:59"
             },
             {
                 "ip": "10.4.172.132",
                 "location": "301",
-                "mac": ""
+                "mac": "00:22:EE:07:FF:C4"
             },
             {
                 "ip": "10.4.172.133",
                 "location": "305 - unaccessable",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:19"
             },
             {
                 "ip": "10.4.172.134",
                 "location": "Kitchen 1",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:2E"
             },
             {
                 "ip": "10.4.172.135",
                 "location": "300",
-                "mac": ""
+                "mac": "00:22:EE:07:FF:C6"
             },
             {
                 "ip": "10.4.172.136",
                 "location": "308",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:A4"
             },
             {
                 "ip": "10.4.172.137",
                 "location": "328",
-                "mac": ""
+                "mac": "00:22:EE:27:01:50"
             },
             {
                 "ip": "10.4.172.138",
                 "location": "309",
-                "mac": ""
+                "mac": "00:22:EE:27:01:4F"
             },
             {
                 "ip": "10.4.172.139",
                 "location": "Kitchen 2",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:3E"
             },
             {
                 "ip": "10.4.172.140",
                 "location": "304",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:3B"
             },
             {
                 "ip": "10.4.172.141",
                 "location": "3rd Floor South Boys RestRoom",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:39"
             },
             {
                 "ip": "10.4.172.142",
                 "location": "3rd Floor North Boys RestRoom",
-                "mac": ""
+                "mac": "00:22:EE:17:2B:39"
             },
             {
                 "ip": "10.4.172.143",
                 "location": "3rd Floor North Girls RestRoom",
-                "mac": ""
+                "mac": "00:22:EE:17:26:87"
             },
             {
                 "ip": "10.4.172.144",
                 "location": "313",
-                "mac": ""
+                "mac": "00:22:EE:27:01:C5"
             },
             {
                 "ip": "10.4.172.145",
-                "location": "312"
+                "location": "312",
+                "mac": "00:22:EE:07:FD:11"
             },
             {
                 "ip": "10.4.172.146",
@@ -636,7 +653,7 @@
             {
                 "ip": "10.4.172.147",
                 "location": "323",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:AF"
             },
             {
                 "ip": "10.4.172.148",
@@ -646,27 +663,27 @@
             {
                 "ip": "10.4.172.149",
                 "location": "325B",
-                "mac": ""
+                "mac": "00:22:EE:27:01:FB"
             },
             {
                 "ip": "10.4.172.150",
                 "location": "322",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:BC"
             },
             {
                 "ip": "10.4.172.151",
                 "location": "unknown",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:9F"
             },
             {
                 "ip": "10.4.172.152",
                 "location": "327",
-                "mac": ""
+                "mac": "00:22:EE:07:FF:BF"
             },
             {
                 "ip": "10.4.172.153",
                 "location": "310",
-                "mac": ""
+                "mac": "00:22:EE:07:F8:89"
             },
             {
                 "ip": "10.4.172.154",
