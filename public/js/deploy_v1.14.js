@@ -227,3 +227,16 @@ async function main() {
 }
 
 main().catch(e => err(`Fatal: ${e.message}`));
+
+const fs = require("fs");
+const path = require("path");
+
+const basePath = path.resolve(__dirname, "base.cfg");
+const configPath = path.resolve(__dirname, "config.txt");
+
+if (fs.existsSync(basePath)) {
+    fs.copyFileSync(basePath, configPath);
+    console.log("config.txt reset to base.cfg");
+} else {
+    console.log("base.cfg not found!");
+}

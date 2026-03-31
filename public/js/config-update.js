@@ -10,10 +10,7 @@ function parseConfig(text) {
         if (!l || !l.includes("=")) return;
 
         const i = l.indexOf("=");
-        const key = l.slice(0, i).trim();
-        const value = l.slice(i + 1).trim();
-
-        map[key] = value;
+        map[l.slice(0, i).trim()] = l.slice(i + 1).trim();
     });
 
     return map;
@@ -26,7 +23,6 @@ function serializeConfig(baseText, merged) {
     baseText.split("\n").forEach(line => {
         const l = line.trim();
 
-        // Preserve comments / blank lines
         if (!l || !l.includes("=")) {
             out.push(line);
             return;
@@ -42,17 +38,16 @@ function serializeConfig(baseText, merged) {
         }
     });
 
-    // Append new keys not in base
     Object.keys(merged).forEach(k => {
         if (!seen.has(k)) {
             out.push(`${k} = ${merged[k]}`);
         }
     });
 
-    // 🔥 CLEAN OUTPUT (important for Algo)
+    // CLEAN OUTPUT FOR ALGO
     return out.join("\n")
-        .replace(/\r/g, "")   // remove Windows CR
-        .trim() + "\n";       // clean ending
+        .replace(/\r/g, "")
+        .trim() + "\n";
 }
 
 /* =========================
@@ -103,7 +98,7 @@ function collectOverrides() {
 }
 
 /* =========================
-   MAIN GENERATE FUNCTION
+   BUILD CONFIG
 ========================= */
 
 async function buildConfig() {
@@ -118,52 +113,33 @@ async function buildConfig() {
 }
 
 /* =========================
-   DOWNLOAD CONFIG
+   SEND TO SERVER (NO DOWNLOAD)
 ========================= */
 
-async function downloadConfig() {
-    const finalCfg = await buildConfig();
+async function applyConfig() {
+    try {
+        const finalCfg = await buildConfig();
 
-    const blob = new Blob([finalCfg], {
-        type: "text/plain;charset=utf-8"
-    });
+        const res = await fetch("/apply-config", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: finalCfg
+        });
 
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "algo-final.cfg";
-    a.click();
-}
+        if (!res.ok) throw new Error("Server error");
 
-/* =========================
-   SEND TO SERVER (API FLOW)
-========================= */
-
-async function sendConfigToServer() {
-    const finalCfg = await buildConfig();
-
-    const res = await fetch("/save-config", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: finalCfg
-    });
-
-    if (res.ok) {
-        alert("Config sent to server!");
-    } else {
-        alert("Failed to send config");
+        alert("Config sent and applied!");
+    } catch (e) {
+        console.error(e);
+        alert("Failed to apply config");
     }
 }
 
 /* =========================
-   BUTTON HANDLERS
+   BUTTON
 ========================= */
 
-// Download button
-document.getElementById("downloadConfig")
-    ?.addEventListener("click", downloadConfig);
-
-// Send-to-server button
 document.getElementById("applyConfig")
-    ?.addEventListener("click", sendConfigToServer);
+    ?.addEventListener("click", applyConfig);
