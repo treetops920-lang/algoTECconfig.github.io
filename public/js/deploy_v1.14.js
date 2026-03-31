@@ -64,7 +64,7 @@ function isVersionOlder(current, target) {
     return false;
 }
 
-/* ================= HMAC API WITH AUTO-TIME SYNC ================= */
+/* ================= API ================= */
 
 async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
     const now = new Date(Date.now() + (timeOffset * 1000));
@@ -84,7 +84,9 @@ async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
         hmacInput = `${method}:${endpoint}:${timestamp}:${nonce}`;
     }
 
-    const signature = crypto.createHmac("sha256", API_PASSWORD).update(hmacInput).digest("hex");
+    const signature = crypto.createHmac("sha256", API_PASSWORD)
+        .update(hmacInput)
+        .digest("hex");
 
     try {
         return await axios({
@@ -94,7 +96,10 @@ async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
             headers: {
                 "Authorization": `hmac admin:${nonce}:${signature}`,
                 "Date": dateHeader,
-                ...(data && { "Content-Type": "application/json", "Content-Md5": contentMd5 })
+                ...(data && {
+                    "Content-Type": "application/json",
+                    "Content-Md5": contentMd5
+                })
             },
             httpsAgent: secureAgent,
             timeout: 10000
@@ -113,13 +118,18 @@ async function apiRequest(host, endpoint, method, data = null, timeOffset = 0) {
 
 async function getFirmware(host) {
     const res = await apiRequest(host, "/api/info/about", "GET");
-    return { model: res.data["Product Name"], version: res.data["Firmware Version"] };
+    return {
+        model: res.data["Product Name"],
+        version: res.data["Firmware Version"]
+    };
 }
 
 async function uploadFirmware(host, firmwareFile) {
     const fwPath = path.resolve(__dirname, "firmware", firmwareFile);
-    if (!fs.existsSync(fwPath)) throw new Error(`File missing: ${fwPath}`);
+    if (!fs.existsSync(fwPath)) throw new Error(`Missing firmware: ${fwPath}`);
+
     action(`Uploading FW ${firmwareFile} → ${host}`);
+
     return axios({
         method: "POST",
         url: `https://${host}/api/firmware`,
@@ -130,11 +140,12 @@ async function uploadFirmware(host, firmwareFile) {
     });
 }
 
-async function waitForDevice(ip, customGrace) {
-    const grace = customGrace || GRACE_SECONDS;
+async function waitForDevice(ip, grace = GRACE_SECONDS) {
     action(`Waiting ${grace}s for ${ip}...`);
     await sleep(grace * 1000);
+
     const start = Date.now();
+
     while (Date.now() - start < (ONLINE_TIMEOUT_SECONDS * 1000)) {
         try {
             await getFirmware(ip);
@@ -142,22 +153,25 @@ async function waitForDevice(ip, customGrace) {
             ok(`${ip} is back online`);
             return;
         } catch (e) {
-            process.stdout.write(e.response?.status === 403 ? `${C.YELLOW}?${C.RESET}` : `${C.GRAY}.${C.RESET}`);
+            process.stdout.write(".");
             await sleep(RETRY_DELAY_MS);
         }
     }
-    throw new Error(`Device ${ip} timed out.`);
+
+    throw new Error(`Timeout waiting for ${ip}`);
 }
 
-/* ================= MAIN ================= */
+/* ================= DEVICE PROCESS ================= */
 
 async function processDevice(oldIp, newIp) {
     console.log(`\n${C.BOLD}===== ${oldIp} → ${newIp} =====${C.RESET}`);
+
     try {
         const info = await getFirmware(oldIp);
         ok(`${info.model} (v${info.version})`);
 
         step("Setting Static IP");
+
         const netConfig = {
             "nm.ipv4.mode": "static",
             "nm.ipv4.address": newIp,
@@ -174,69 +188,86 @@ async function processDevice(oldIp, newIp) {
 
         const stableInfo = await getFirmware(newIp);
         const fw = FIRMWARE_MAP[stableInfo.model];
+
         if (fw && isVersionOlder(stableInfo.version, fw.version) && !DRY_RUN) {
-            warn(`Updating FW: ${stableInfo.version} → ${fw.version}`);
+            warn(`Updating FW → ${fw.version}`);
             await uploadFirmware(newIp, fw.file);
             await waitForDevice(newIp, FW_GRACE_SECONDS);
         } else {
-            ok(`Firmware v${stableInfo.version} is okay. Skipping update.`);
+            ok(`Firmware OK (${stableInfo.version})`);
         }
 
         if (!DRY_RUN) {
             const cfgPath = path.resolve(__dirname, CONFIG_FILE_NAME);
+
             if (fs.existsSync(cfgPath)) {
                 step("Applying config.txt");
-                await apiRequest(newIp, "/api/settings", "PUT", { config: fs.readFileSync(cfgPath, "utf8") });
+
+                const configText = fs.readFileSync(cfgPath, "utf8");
+
+                await apiRequest(newIp, "/api/settings", "PUT", {
+                    config: configText
+                });
+
                 await apiRequest(newIp, "/api/controls/reboot", "POST");
                 await waitForDevice(newIp);
+            } else {
+                warn("config.txt not found, skipping config apply");
             }
         }
-        ok(`${newIp} Success`);
+
+        ok(`${newIp} SUCCESS`);
     } catch (e) {
-        err(`${oldIp} failed: ${e.message}`);
+        err(`${oldIp} FAILED: ${e.message}`);
     }
 }
+
+/* ================= MAIN ================= */
 
 async function main() {
-    info(`Looking for list at: ${DEVICE_LIST_FILE}`);
+    try {
+        info(`Looking for: ${DEVICE_LIST_FILE}`);
 
-    if (!fs.existsSync(DEVICE_LIST_FILE)) {
-        err("ERROR: 'ip_speakers.txt' NOT FOUND! Create it in the same folder as this script.");
-        return;
-    }
-
-    const content = fs.readFileSync(DEVICE_LIST_FILE, "utf8");
-    const lines = content.split("\n").map(l => l.trim()).filter(Boolean);
-
-    if (lines.length === 0) {
-        warn("The 'ip_speakers.txt' file is empty. Add 'oldip,newip' lines to it.");
-        return;
-    }
-
-    info(`Found ${lines.length} devices to process.`);
-
-    for (const line of lines) {
-        const parts = line.split(",");
-        if (parts.length < 2) {
-            warn(`Skipping invalid line: ${line}`);
-            continue;
+        if (!fs.existsSync(DEVICE_LIST_FILE)) {
+            throw new Error("ip_speakers.txt not found");
         }
-        await processDevice(parts[0].trim(), parts[1].trim());
+
+        const lines = fs.readFileSync(DEVICE_LIST_FILE, "utf8")
+            .split("\n")
+            .map(l => l.trim())
+            .filter(Boolean);
+
+        if (!lines.length) {
+            throw new Error("No devices in list");
+        }
+
+        info(`Processing ${lines.length} devices`);
+
+        for (const line of lines) {
+            const [oldIp, newIp] = line.split(",");
+            if (!oldIp || !newIp) {
+                warn(`Skipping bad line: ${line}`);
+                continue;
+            }
+
+            await processDevice(oldIp.trim(), newIp.trim());
+        }
+
+        ok("All devices processed");
+    } catch (e) {
+        err(e.message);
+    } finally {
+        //  ALWAYS RESET CONFIG
+        const basePath = path.resolve(__dirname, "base.cfg");
+        const configPath = path.resolve(__dirname, "config.txt");
+
+        if (fs.existsSync(basePath)) {
+            fs.copyFileSync(basePath, configPath);
+            console.log("config.txt reset to base.cfg");
+        } else {
+            console.log("base.cfg not found, cannot reset");
+        }
     }
-    ok("Finished all processing.");
 }
 
-main().catch(e => err(`Fatal: ${e.message}`));
-
-const fs = require("fs");
-const path = require("path");
-
-const basePath = path.resolve(__dirname, "base.cfg");
-const configPath = path.resolve(__dirname, "config.txt");
-
-if (fs.existsSync(basePath)) {
-    fs.copyFileSync(basePath, configPath);
-    console.log("config.txt reset to base.cfg");
-} else {
-    console.log("base.cfg not found!");
-}
+main();
