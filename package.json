@@ -1,0 +1,25 @@
+{
+  "name": "web-app-algo",
+  "version": "1.0.0",
+  "description": "This is a product for The Education Connection that was created during by an intern, this product is used to do mas configurations of algo speakers for school districts and optionally do individual configurations. please be respectful of this product and the users of it.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treetops920-lang/algoTECconfig.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/treetops920-lang/algoTECconfig.github.io/issues"
+  },
+  "homepage": "https://github.com/treetops920-lang/algoTECconfig.github.io#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
