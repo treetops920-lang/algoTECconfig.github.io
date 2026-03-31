@@ -141,5 +141,5 @@ async function applyConfig() {
    BUTTON
 ========================= */
 
-document.getElementById("applyConfig")
-    ?.addEventListener("click", applyConfig);
+document.getElementById("generateConfig")
+    ?.addEventListener("click", generateConfig);
