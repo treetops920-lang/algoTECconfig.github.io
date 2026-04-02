@@ -71,6 +71,12 @@ header {
     margin-bottom: 20px;
 }
 
+.notice {
+    color: #b30808;
+    opacity: .8;
+    font-size: 0.9rem;
+}
+
 details summary {
     display: flex;
     justify-content: space-between;
