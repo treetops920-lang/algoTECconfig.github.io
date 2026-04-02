@@ -11,7 +11,7 @@ html {
 }
 
 .page-wrapper {
-    max-width: 1400px;
+    max-width: 1300px;
     margin: auto;
     padding: 24px;
 }
@@ -46,7 +46,8 @@ header {
     background: white;
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 16px;
+    padding: 20px;
+    margin-right: 20px;
     height: fit-content;
 }
 
@@ -69,13 +70,10 @@ header {
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 20px;
+    margin-left: 10px;
 }
 
-.notice {
-    color: #b30808;
-    opacity: .8;
-    font-size: 0.9rem;
-}
+
 
 details summary {
     display: flex;
@@ -196,6 +194,17 @@ footer {
     align-items: center;
     /* Aligns label and text on the same line */
     gap: 12px;
+}
+
+/* Style for notice text inside input-group */
+.input-group #notice {
+    font-size: 0.875rem;
+    color: #b30808;
+    opacity: 0.5;
+    line-height: 1.4;
+    margin: 6px 0;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .input-group label {
@@ -348,40 +357,5 @@ footer {
 
     details summary {
         font-size: 1.05rem;
-    }
-}
-
-/* ===== Large Devices (desktops 1024px+) ===== */
-@media (min-width: 1024px) {
-    .layout {
-        grid-template-columns: 220px 1fr;
-        gap: 24px;
-    }
-
-    .sidebar {
-        width: 220px;
-    }
-
-    .card {
-        padding: 16px;
-        margin-bottom: 20px;
-    }
-
-    .locked-context {
-        gap: 40px;
-        min-width: 320px;
-    }
-
-    .input-group input[readonly] {
-        width: 350px;
-    }
-
-    button,
-    .page-btn {
-        width: auto;
-    }
-
-    details summary {
-        font-size: 1.1rem;
     }
 }
