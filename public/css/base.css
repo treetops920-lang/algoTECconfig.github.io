@@ -225,3 +225,157 @@ footer {
 .input-group input[readonly]:focus {
     outline: none;
 }
+
+/* ===== Small Devices (phones < 768px) ===== */
+@media (max-width: 767px) {
+
+    /* Stack everything vertically */
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        justify-items: center;
+        /* center children horizontally */
+    }
+
+    /* Sidebar full width and centered */
+    .sidebar {
+        position: relative;
+        top: auto;
+        width: 100%;
+        max-width: 400px;
+        /* optional: limit max width */
+        margin: 0 auto 16px auto;
+    }
+
+    .sidebar a {
+        padding: 10px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    /* Cards full width and centered */
+    .card {
+        padding: 12px;
+        margin: 0 auto 16px auto;
+        width: 100%;
+        max-width: 400px;
+        /* optional */
+        word-break: break-word;
+    }
+
+    /* Locked context stacking and centering */
+    .locked-context {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 400px;
+        /* optional */
+        margin: 0 auto;
+        padding: 12px;
+    }
+
+    /* Inputs wrap naturally */
+    .input-group input[readonly] {
+        width: 100%;
+        min-width: 0;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    /* Buttons full width */
+    button,
+    .page-btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        /* center buttons horizontally */
+    }
+
+    header,
+    footer {
+        text-align: center;
+        padding: 12px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    details summary {
+        font-size: 1rem;
+        word-break: break-word;
+    }
+}
+
+/* ===== Medium Devices (tablets 768px - 1023px) ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .layout {
+        grid-template-columns: 180px 1fr;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 180px;
+    }
+
+    .card {
+        padding: 14px;
+        margin-bottom: 18px;
+    }
+
+    .locked-context {
+        gap: 20px;
+        min-width: 250px;
+    }
+
+    .input-group input[readonly] {
+        width: 250px;
+    }
+
+    button,
+    .page-btn {
+        width: auto;
+    }
+
+    details summary {
+        font-size: 1.05rem;
+    }
+}
+
+/* ===== Large Devices (desktops 1024px+) ===== */
+@media (min-width: 1024px) {
+    .layout {
+        grid-template-columns: 220px 1fr;
+        gap: 24px;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .card {
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .locked-context {
+        gap: 40px;
+        min-width: 320px;
+    }
+
+    .input-group input[readonly] {
+        width: 350px;
+    }
+
+    button,
+    .page-btn {
+        width: auto;
+    }
+
+    details summary {
+        font-size: 1.1rem;
+    }
+}
