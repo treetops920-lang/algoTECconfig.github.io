@@ -7,6 +7,8 @@ const app = express();
 
 app.use(express.text());
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // Receive config and trigger deployment
 app.post("/apply-config", (req, res) => {
     const configPath = path.resolve(__dirname, "config.txt");
