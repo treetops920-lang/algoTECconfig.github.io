@@ -53,43 +53,41 @@ function serializeConfig(baseText, merged) {
 /* =========================
    UI → CONFIG MAPPING
 ========================= */
+function getValue(selector) {
+    const el = document.querySelector(selector);
+    return el ? el.value : undefined;
+}
+
+function getById(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : undefined;
+}
 
 function collectOverrides() {
     const overrides = {};
 
-    const startupTone = document.querySelector(
-        'input[name="startupTone"]:checked'
-    )?.value;
-
+    const startupTone = getValue('input[name="startupTone"]:checked');
     if (startupTone !== undefined) {
         overrides["admin.startuptone"] =
             startupTone === "1" ? "chime.wav" : "";
     }
 
-    const ringVol = document.querySelector(
-        'select[name="audio-level"]'
-    )?.value;
-
+    const ringVol = getValue('select[name="audio-level"]');
     if (ringVol !== undefined) {
-        overrides["audio.ring.vol"] = `${ringVol}dB`;
+        overrides["audio.ring.vol"] = ringVol + "dB";
     }
 
-    const pageVol = document.querySelector(
-        'select[name="Page-Speaker-volume"]'
-    )?.value;
-
+    const pageVol = getValue('select[name="Page-Speaker-volume"]');
     if (pageVol !== undefined) {
-        overrides["audio.page.vol"] = `${pageVol}dB`;
+        overrides["audio.page.vol"] = pageVol + "dB";
     }
 
-    const tz = document.querySelector(".timezone + select")?.value;
-
+    const tz = getValue(".timezone + select");
     if (tz && tz !== "unselected") {
         overrides["admin.timezone"] = tz;
     }
 
-    const ntp = document.getElementById("ntp-server-primary")?.value;
-
+    const ntp = getById("ntp-server-primary");
     if (ntp) {
         overrides["net.time1"] = ntp;
     }
