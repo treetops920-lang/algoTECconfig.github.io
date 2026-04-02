@@ -28,7 +28,7 @@ function step(msg) { console.log(`${C.BLUE}[STEP]${C.RESET} ${msg}`); }
 /* ================= CONFIG ================= */
 
 const API_PASSWORD = "algo";
-const DEVICE_LIST_FILE = path.resolve("../ip_speakers.txt");
+const DEVICE_LIST_FILE = path.resolve(__dirname, "../ip_speakers.txt");
 const CONFIG_FILE_NAME = "config.txt";
 const PROV_URL = "http://10.4.170.10:8080/";
 
@@ -258,8 +258,8 @@ async function main() {
         err(e.message);
     } finally {
         //  ALWAYS RESET CONFIG
-        const basePath = path.resolve(__dirname, "base.cfg");
-        const configPath = path.resolve(__dirname, "config.txt");
+        const basePath = path.resolve(__dirname, "./base.cfg");
+        const configPath = path.resolve(__dirname, "./config.txt");
 
         if (fs.existsSync(basePath)) {
             fs.copyFileSync(basePath, configPath);
