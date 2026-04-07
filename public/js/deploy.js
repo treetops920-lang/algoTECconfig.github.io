@@ -41,6 +41,20 @@ const ONLINE_TIMEOUT_SECONDS = 240;
 
 const secureAgent = new https.Agent({ rejectUnauthorized: false });
 
+/* ================= READING CONFIG ================= */
+
+const CONFIG_FILE = path.resolve(__dirname, "config.txt");
+const BASE_FILE = path.resolve(__dirname, "base.txt");
+
+// Read config
+const configText = fs.readFileSync(CONFIG_FILE, "utf8");
+
+// Reset config
+if (fs.existsSync(BASE_FILE)) {
+    fs.copyFileSync(BASE_FILE, CONFIG_FILE);
+} else {
+    console.log("base.txt not found, cannot reset");
+}
 /* ================= FIRMWARE MAP ================= */
 
 const FIRMWARE_MAP = {
@@ -258,14 +272,14 @@ async function main() {
         err(e.message);
     } finally {
         //  ALWAYS RESET CONFIG
-        const basePath = path.resolve(__dirname, "./base.cfg");
+        const basePath = path.resolve(__dirname, "./base.txt");
         const configPath = path.resolve(__dirname, "./config.txt");
 
         if (fs.existsSync(basePath)) {
             fs.copyFileSync(basePath, configPath);
-            console.log("config.txt reset to base.cfg");
+            console.log("config.txt reset to base.txt");
         } else {
-            console.log("base.cfg not found, cannot reset");
+            console.log("base.txt not found, cannot reset");
         }
     }
 }

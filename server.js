@@ -18,13 +18,17 @@ app.post("/apply-config", (req, res) => {
     console.log("config.txt updated");
 
     // 🔥 Run your deployment script
-    exec("node deploy.js", (err, stdout, stderr) => {
+    exec("node /home/tec/config-site/web-app-algo/public/js/deploy.js", (err, stdout, stderr) => {
+        console.log("=== DEPLOY STDOUT ===");
+        console.log(stdout);
+        console.log("=== DEPLOY STDERR ===");
+        console.log(stderr);
+
         if (err) {
             console.error(err);
-            return res.status(500).send("Deployment failed");
+            return res.status(500).send("Deployment failed: " + err.message);
         }
 
-        console.log(stdout);
         res.send("Deployment complete");
     });
 });
