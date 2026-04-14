@@ -100,7 +100,7 @@ function collectOverrides() {
 ========================= */
 
 async function buildConfig() {
-    const baseText = await fetch("/base.txt").then(r => r.text());
+    const baseText = await fetch("base.cfg").then(r => r.text());
 
     const baseMap = parseConfig(baseText);
     const overrides = collectOverrides();
@@ -140,4 +140,4 @@ async function applyConfig() {
 ========================= */
 
 document.getElementById("generateConfig")
-    ?.addEventListener("click", applyConfig);
+    ?.addEventListener("click", generateConfig);
