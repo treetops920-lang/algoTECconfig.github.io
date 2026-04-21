@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 // IMPORTANT: import your existing script functions
-const { processDevice } = require('./your-script-file'); // adjust name
+const { processDevice } = require('./deploy,js'); // adjust name
 
 app.use(express.text()); // because you're sending text/plain
 
