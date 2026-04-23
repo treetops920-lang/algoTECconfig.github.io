@@ -1,0 +1,53 @@
+Quick Use Guide - deploy.js
+Mass configuration of Algo speakers
+
+1. Prepare device list
+    Collect all speaker IP addresses.
+    Decide the mapping for static IP assignment (old → new).
+
+2. format each line like 
+    old_ip,new_ip
+    e.x 192.168.0.0,192168.0.0
+        192.168.19.28,192.168.0.8
+    This tells the script: current device IP, desired static IP
+
+3. Configure subnet + gateway (IMPORTANT)
+    In deploy.js, find:
+    /* IP SUBNET / GATEWAY HARDCODED - ASSUMING ALL DEVICES ON SAME SUBNET */
+        This is around lines ~174–181.
+        You usually only need to change:
+            Gateway IP
+            Subnet mask (e.g. /24 = 255.255.255.0)
+    All devices must be on the same subnet for this script to work correctly.
+
+4. Configure device settings (config.txt)
+    You have two options:
+
+        A. Recommended (best method)
+            Configure one speaker manually using the Algo web interface
+            Export/download its configuration
+            Copy the config contents into config.txt
+
+                    Best for full deployments
+                    Ensures settings are valid and tested
+
+        B. Manual editing
+
+            Edit config.txt directly (example: admin.pwd=algo)
+
+                    Good for small changes
+                    Not recommended for full deployments
+
+5. Firmware setup 
+    make sure you have it set to whatever current version you want the firmware to be (5.6)
+
+6. 6. Final checks (DO NOT SKIP)
+    Before running:
+
+        IP list is correctly formatted
+        Subnet and gateway are correct
+        Firmware versions are correct   
+        config.txt contains valid configuration
+        No typos in file names
+
+7.  run node deploy.js

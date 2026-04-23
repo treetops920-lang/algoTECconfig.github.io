@@ -44,8 +44,8 @@ const secureAgent = new https.Agent({ rejectUnauthorized: false });
 /* ================= FIRMWARE MAP ================= */
 
 const FIRMWARE_MAP = {
-    "Algo 8301 Paging Adapter": { version: "3.3.0", file: "8301_v3.3.0.bin" },
-    "Algo 8186 SIP Horn Speaker": { version: "4.5.1", file: "8186_v4.5.1.bin" }
+    "Algo 8301 Paging Adapter": { version: "5.6" },
+    "Algo 8186 SIP Horn Speaker": { version: "5.6" }
 };
 
 /* ================= UTILS ================= */
@@ -171,7 +171,7 @@ async function processDevice(oldIp, newIp) {
         ok(`${info.model} (v${info.version})`);
 
         step("Setting Static IP");
-
+        /*==IP SUBNET/GATEWAY HARDCODED - ASSUMING ALL DEVICES ON SAME SUBNET==*/
         const netConfig = {
             "nm.ipv4.mode": "static",
             "nm.ipv4.address": newIp,
@@ -212,7 +212,7 @@ async function processDevice(oldIp, newIp) {
                 await apiRequest(newIp, "/api/controls/reboot", "POST");
                 await waitForDevice(newIp);
             } else {
-                warn("config.txt not found, skipping config apply");
+                warn("config.txt missing - DEVICES IS NOT CONFIGURED");
             }
         }
 
@@ -256,17 +256,6 @@ async function main() {
         ok("All devices processed");
     } catch (e) {
         err(e.message);
-    } finally {
-        //  ALWAYS RESET CONFIG
-        const basePath = path.resolve(__dirname, "./base.cfg");
-        const configPath = path.resolve(__dirname, "./config.txt");
-
-        if (fs.existsSync(basePath)) {
-            fs.copyFileSync(basePath, configPath);
-            console.log("config.txt reset to base.cfg");
-        } else {
-            console.log("base.cfg not found, cannot reset");
-        }
     }
 }
 
