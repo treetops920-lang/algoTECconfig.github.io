@@ -1,0 +1,187 @@
+╔════════════════════════════════════════════════════════════════╗
+║   ALGO SPEAKER DEPLOYMENT SCRIPT (deploy.js)                    ║
+╚════════════════════════════════════════════════════════════════╝
+
+📋 OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Automates mass configuration of Algo network speakers with:
+  ✓ IP reconfiguration (static assignment)
+  ✓ Firmware version checking
+  ✓ Configuration file deployment (config.txt)
+  ✓ Device reboot and validation
+  ✓ Automated retry and recovery handling
+
+Bulk provisioning for multiple devices on the same network subnet.
+
+
+📦 REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SOFTWARE:
+  • Node.js (v16.20.2 recommended)
+  • npm packages: axios
+
+INSTALL:
+  $ npm install axios
+
+
+📁 FILES REQUIRED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  ip_speakers.txt
+    Format: old_ip,new_ip
+    Example:
+      192.168.0.10,10.4.170.20
+      192.168.0.11,10.4.170.21
+
+2️⃣  config.txt
+    • Full device configuration from Algo speaker
+    • Applied to every device after provisioning
+
+
+⚙️  CONFIGURATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Inside deploy.js, configure:
+
+1️⃣  API AUTHENTICATION
+    const API_PASSWORD = "algo";
+    → Generates HMAC authentication for API requests
+
+2️⃣  PROVISIONING SERVER
+    const PROV_URL = "http://10.4.170.10:8080/";
+    → Used by devices for provisioning
+
+3️⃣  SUBNET CONFIGURATION ⚠️ CRITICAL
+    Inside processDevice():
+    {
+      "nm.ipv4.netmask": "255.255.255.0",
+      "nm.ipv4.gateway": "10.4.172.1"
+    }
+    
+    Assumes: All devices on same subnet (/24 default)
+    ⚡ If network is NOT /24, update netmask!
+
+4️⃣  FIRMWARE MAPPING
+    const FIRMWARE_MAP = {
+      "Algo 8301 Paging Adapter": { version: "5.6" },
+      "Algo 8186 SIP Horn Speaker": { version: "5.6" }
+    };
+    → Auto-upgrades outdated firmware
+
+5️⃣  SAFETY MODE
+    const DRY_RUN = false;
+    • false = Execute changes
+    • true = Simulate only
+
+
+🔄 HOW IT WORKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each device in ip_speakers.txt:
+
+  STEP 1️⃣  → Connect to device
+            ├─ Read model & firmware version
+
+  STEP 2️⃣  → Assign static IP
+            ├─ Apply new IP address
+            ├─ Set subnet mask + gateway
+            └─ Reboot device
+
+  STEP 3️⃣  → Wait for reboot
+            ├─ Wait for device online
+            └─ Retry until timeout (4 min default)
+
+  STEP 4️⃣  → Check firmware
+            ├─ Compare installed vs required
+            ├─ Upload if outdated
+            └─ Reboot after update
+
+  STEP 5️⃣  → Apply configuration
+            ├─ Load config.txt
+            ├─ Push to device
+            └─ Reboot
+
+  STEP 6️⃣  → Validate
+            ├─ Confirm reachable
+            └─ Log success/failure
+
+
+▶️  EXECUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  $ node deploy.js
+
+
+📊 OUTPUT BEHAVIOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Log Types:
+  [INFO]   → General process info
+  [STEP]   → Current action
+  [OK]     → Success state
+  [WARN]   → Non-critical issue
+  [ERROR]  → Failure state
+
+Example Output:
+  ===== 192.168.0.10 → 10.4.170.20 =====
+  [OK] Algo 8186 SIP Horn Speaker (v5.2)
+  [STEP] Setting Static IP
+  [ACTION] Uploading FW 8186_v5.6.bin → 10.4.170.20
+  [OK] Firmware OK (5.6)
+  [STEP] Applying config.txt
+  [OK] 10.4.170.20 SUCCESS
+
+
+⏱️  TIMEOUTS & DELAYS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  GRACE_SECONDS ................... 90s   (wait after reboot)
+  RETRY_DELAY_MS ............... 3000ms   (polling interval)
+  ONLINE_TIMEOUT_SECONDS ........ 240s   (max device recovery)
+
+
+✅ ASSUMPTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✓ All devices on same subnet
+  ✓ Devices support Algo REST API
+  ✓ Firmware files match device models
+  ✓ config.txt is valid and compatible
+  ✓ HTTPS certificates accepted (self-signed OK)
+
+
+❌ COMMON ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ISSUE: Device not coming back online
+FIX:
+  • Check IP assignment
+  • Verify subnet mask
+  • Ensure firewall allows traffic
+
+
+ISSUE: Authentication failures
+FIX:
+  • Verify API_PASSWORD setting
+  • Ensure device API is enabled
+
+
+⚠️  SAFETY NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  🔒 Always test with "DRY_RUN = true" first
+  🔒 Start with 1–2 devices before full deployment
+  🔒 Misconfigured subnet/gateway WILL isolate devices
+
+
+📝 SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Full automation pipeline for Algo speaker provisioning:
+  ✓ Network setup
+  ✓ Firmware lifecycle
+  ✓ Configuration deployment
+  ✓ Reboots and validation
+
+Designed for bulk enterprise deployment with consistent architecture.
