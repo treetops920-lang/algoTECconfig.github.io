@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/treetops920-lang/algoTECconfig.github.io#readme",
   "dependencies": {
+    "axios": "^1.15.2",
     "express": "^5.2.1"
   }
 }
